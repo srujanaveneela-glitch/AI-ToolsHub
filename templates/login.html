@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    
+</head>
+<body>
+    
+    <h1>Login Page</h1><br>
+    <h3>Login to Continue.</h3>
+    <hr>
+   <div class="box">
+    <div class="login-container">
+        {% if error %}
+            <p style="color:red;">{{ error }}</p>
+        {% endif %}
+        
+        <form method="POST" action="/login" onsubmit="return validateLogin()">
+            <label for="email">Email: </label>
+            <input type="email" placeholder="enter email" id="email" name="email"><br><br>
+             <label for="password">Password: </label>
+            <input type="password" placeholder="enter password" id="password" name="password"><br><br>
+            <button type="submit" >Login</button>
+            <div class="forgot-link">
+            <a href="{{url_for('forgotpassword')}}">Forgot Password?</a>
+            </div>
+
+<p class="register-link">New User? <a href="{{url_for('register')}}">Register here</a></p>
+<p id="message" style="color:red;"></p>
+
+<script>
+function validateLogin() {
+
+    var email = document.getElementById("email").value.trim();
+    var password = document.getElementById("password").value.trim();
+
+    if (email === "" || password === "") {
+
+        document.getElementById("message").innerHTML =
+            "Please fill all fields!";
+
+        return false;
+    }
+
+    return true;
+}
+</script>
+            
+        </form>
+    </div>
+    </div>
+</body>
+</html>

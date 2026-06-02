@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{url_for('static',filename='dashboard.css')}}">
+    
+
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">AI Tools Hub</div>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('study')}}">Study</a></li>
+            <li><a href="{{ url_for('coding')}}">Coding</a></li>
+            <li><a href="{{ url_for('design')}}">Design</a></li>
+            <li><a href="{{ url_for('career')}}">Career</a></li>
+            <li><a href="{{ url_for('document')}}">Document</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="{{url_for('logout')}}" onclick="return confirmLogout()" class="logout-btn">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="breadcrumb">
+        <a href="{{url_for('home')}}">Home</a>>
+        <span>Dashboard</span>
+    </div>
+    <h1>Select category to find best ai tools</h1>
+    <hr>
+    
+    <div class="card-container">
+    <a href="{{url_for('study')}}" class="card-link">
+    <div class="card">
+        <h2>📘 Study</h2>
+        <p>AI tools for notes, quizzes, PPTs, summaries, and exam preparation.</p>
+    </div>
+    </a>
+    <a href="{{url_for('coding')}}" class="card-link">
+    <div class="card">
+        <h2>💻 Coding</h2>
+        <p>AI tools for code generation, debugging, DSA, and programming help.</p>
+    </div>
+    </a>
+    <a href="{{url_for('design')}}" class="card-link">
+    <div class="card">
+        <h2>🎨Design</h2>
+        <p>AI tools for logo creation, poster design , UI/UX Inspiration, and Social media content creation.</p>
+    </div>
+    </a>
+    <a href="{{url_for('career')}}" class="card-link">
+    <div class="card">
+        <h2>💼Career</h2>
+        <p>AI tools for Resume building, Interview Preparation, Linkedin bio creation, and internship guidance.</p>
+    </div>
+    </a>
+    <a href="{{url_for('document')}}" class="card-link">
+    <div class="card">
+        <h2>📄Document</h2>
+        <p>AI tools for PDF summarisation, document formatting, translation,OCR extraction and report generation.</p>
+    </div>
+    </a>
+    </div>
+    <hr>
+    <div class="about" id="about">
+
+        <h2>About AI Tools Hub</h2>
+
+        <p>
+            AI Tools Hub helps students discover
+            the best AI tools for studying,
+            coding, designing, career preparation
+            and document management.
+        </p>
+
+    </div>
+ <hr>
+    <footer>
+        <p>copyright</p>
+        <p>@ 2026 AI Tools Hub |Developed for students to find best AI Tools</p>
+
+    </footer>
+    <script>
+        function toggleMenu(){
+            document.getElementById("nav-links").classList.toggle("active");
+        }
+        function confirmLogout(){
+            return confirm("Are you sure you want to logout?")
+        }
+    </script>
+ 
+    </body>
+</html>

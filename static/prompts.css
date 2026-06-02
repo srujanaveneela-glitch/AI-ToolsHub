@@ -1,0 +1,108 @@
+#heading{
+    text-align: center;
+    color: #7dd3fc;
+    margin-top: 30px;
+    font-size: 40px;
+}
+hr{
+    width: 90%;
+    border: 1px solid rgba(125,211,252,0.3);
+    margin-top: 20px;
+}
+.input-box{
+    width: 90%;
+    margin: 40px auto;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.input-box input{
+    width: 400px;
+    padding: 15px;
+    border-radius: 12px;
+    border: 2px solid #38bdf8;
+    outline: none;
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+    font-size: 16px;
+}
+.input-box input::placeholder{
+    color: #cbd5e1;
+}
+.input-box button{
+    padding: 15px 25px;
+    border: none;
+    border-radius: 12px;
+    background-color: #00e5ff;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.input-box button:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #00e5ff;
+}
+.box{
+    width: 90%;
+    margin: 30px auto;
+}
+#prompt-container{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 30px;
+}
+.prompt-card{
+    background-color: rgba(135,206,235,0.12);
+    border: 2px solid #00e5ff;
+    border-radius: 20px;
+    padding: 25px;
+    transition: 0.3s;
+    backdrop-filter: blur(10px);
+    box-shadow:
+    0 0 10px rgba(0,229,255,0.2);
+}
+.prompt-card:hover{
+    transform: translateY(-8px);
+    box-shadow:
+    0 0 25px rgba(0,229,255,0.7);
+    border-color: #7df9ff;
+}
+.prompt-card h2{
+    color: #7dd3fc;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+.prompt-card p{
+    color: #dbeafe;
+    line-height: 1.7;
+    font-size: 16px;
+}
+.prompt-card button{
+    margin-top: 20px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #00e5ff;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.prompt-card button:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #00e5ff;
+}
+@media(max-width:768px){
+    #prompt-container{
+        grid-template-columns: 1fr;
+    }
+.input-box{
+        flex-direction: column;
+        align-items: center;
+    }
+    .input-box input{
+        width: 90%;
+    }
+}

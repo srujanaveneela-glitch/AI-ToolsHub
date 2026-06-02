@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{url_for('static',filename='career.css')}}">
+    
+</head>
+<body>
+    <div class="breadcrumb">
+        <a href="{{url_for('home')}}">Home</a>>
+        <a href="{{url_for('dashboard')}}">Dashboard</a>>
+        <span>Career</span>
+    </div>
+    <h1>Career Category Options</h1>
+    <hr>
+    <div class="box" >
+    <div class="career-box">
+    <div class="career-container">
+        <a href="{{url_for('tools',category='cresume')}}" class="career-link">
+            <div class="career-card">
+                <h2>📄Resume Builder</h2>
+            </div>
+        </a>
+        
+        <a href="{{url_for('tools',category='cover')}}" class="career-link">
+            <div class="career-card">
+                <h2>✉️Cover-Letter Generatior</h2>
+            </div>
+        </a>
+        
+        <a href="{{url_for('tools',category='interview')}}" class="career-link">
+    
+            <div class="career-card">
+                <h2>✍️Interview Preparation</h2>
+            </div>
+        </a>
+        
+        <a href="{{url_for('tools',category='hr')}}" class="career-link">
+
+            <div class="career-card">
+                <h2>🤝HR Questions</h2>
+            </div>
+        </a>
+        <a href="{{url_for('tools',category='tech')}}" class="career-link">
+        
+            <div class="career-card">
+                <h2>💻Technical interview prep</h2>
+            </div>
+        </a>
+        
+        <a href="{{url_for('tools',category='linkedin')}}" class="career-link">
+       >
+            <div class="career-card">
+                <h2>🔗Linkedin Bio Creator</h2>
+            </div>
+        
+        </a>
+        <a href="{{url_for('tools',category='portfolio')}}" class="career-link">
+            <div class="career-card">
+                <h2>🌐Portfolio Website ideas</h2>
+            </div>
+        </a>
+        
+        <a href="{{url_for('tools',category='cintern')}}" class="career-link">
+            <div class="career-card">
+                <h2>🎓Internship Guidance</h2>
+            </div>
+        </a>
+    
+        <a href="{{url_for('tools',category='sop')}}" class="career-link">
+
+            <div class="career-card">
+                <h2>📜SOP Writing</h2>
+            </div>
+        </a>
+        
+        <a href="{{url_for('tools',category='cemail')}}" class="career-link">
+            <div class="career-card">
+                <h2>📧Email Writing</h2>
+            </div>
+        </a>
+        
+    </div>
+    </div>
+    </div>
+    
+</body>
+</html>

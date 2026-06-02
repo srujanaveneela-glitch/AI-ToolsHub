@@ -1,0 +1,3478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tools</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{url_for('static',filename='tools.css')}}">
+    
+</head>
+<body>
+    <div class="breadcrumb">
+        <a href="{{url_for('home')}}">Home</a>>
+        <a href="{{url_for('dashboard')}}">Dashboard</a>>
+        {{category.title()}}
+        {% if tool %}>
+        {{tool.replace('_',' ').title()}}
+        {% endif %}>
+        Tools        
+    </div>
+    <h1 id="heading"></h1>
+    <hr>
+    <div class="box">
+    <div id="tools-container"></div>
+    <script>
+        let tool="{{category}}";
+        if(tool == "notebook"){
+            document.getElementById("heading").innerHTML="NoteBook Preparation Tools";
+            document.getElementById("tools-container").innerHTML=`
+                
+            <div class="tool-card">
+                <h2>ChatGPt</h2>
+                    <p>ChatGPT helps students create
+                    notes, summaries, explanations,
+                    assignments and study material
+                    easily.</p>
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='notebook')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>NotebookLM</h2>
+                    <p>NotebookLM helps students create notes,
+                    summaries and study materials easily.
+                    </p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://notebooklm.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='notebook')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                <div class="tool-card">
+                <h2>Notion AI</h2>
+                    <p>Notion AI helps students organize notes,
+                        tasks and study plans efficiently.</p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.notion.so/product/ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='notebook')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Deepseek AI</h2>
+                    <p>DeepSeek AI helps students with coding,
+                    problem solving and learning concepts.
+                    </p>
+                    <p>Rating : ⭐4.6</p>
+                    <a href="https://www.deepseek.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='notebook')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                 <div class="tool-card">
+                    <h2>Gemini</h2>
+                    <p>Gemini helps students generate notes,
+                    answers and explanations quickly.
+                    </p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='notebook')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+        
+        `;
+        }
+        else if(tool == "assignment"){
+            document.getElementById("heading").innerHTML="Assignment Writing Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>ChatGPt</h2>
+                    <p>ChatGPT helps students create
+                    notes, summaries, explanations,
+                    assignments and study material
+                    easily.</p>
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='assignment')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>QuillBot</h2>
+                    <p> QuillBot helps students paraphrase sentences,
+                     improve writing and create better assignments.
+                    </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://quillbot.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='assignment')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                <div class="tool-card">
+                <h2>Grammarly</h2>
+                    <p> Grammarly helps students correct grammar,
+                    spelling and improve professional writing.</p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.grammarly.com" >
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='assignment')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Gemini</h2>
+                    <p>Gemini helps students generate notes,
+                    answers and explanations quickly.
+                    </p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='assignment')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                 <div class="tool-card">
+                    <h2>Claude AI</h2>
+                    <p>  Claude AI helps students generate assignments,
+                     summaries and detailed explanations easily.
+                    </p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://claude.ai" >
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='assignment')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+       ` }      
+          else if(tool == "ppt"){
+            document.getElementById("heading").innerHTML="PPT Generation Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Gamma AI</h2>
+                    <p>Gamma AI helps create presentations, notes, 
+                        and documents using AI-generated layouts and modern designs.</p>
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://gamma.app">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='ppt')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Canva AI</h2>
+                    <p>Canva AI is used for designing presentations, posters,
+                         resumes, social media posts, and graphics easily.
+                    </p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.canva.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='ppt')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Beautiful AI</h2>
+                    <p>Beautiful AI automatically designs professional presentation
+                         slides with smart formatting and templates.
+                    </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.beautiful.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='ppt')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                 <div class="tool-card">
+                    <h2>Slides AI</h2>
+                    <p> Slides AI converts text into presentation slides automatically
+                         and helps save time while creating PPTs. </p>
+                    <p>Rating : ⭐4.6</p>
+                    <a href="https://www.slidesai.io" >
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='ppt')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+       ` }      
+       else if(tool == "research"){
+            document.getElementById("heading").innerHTML="Research Help";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Perplexity AI</h2>
+                    <p>Perplexity AI is an AI-powered search assistant that 
+                        provides answers with sources, citations, and real-time
+                         web information for research and learning.</p>
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://www.perplexity.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='research')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Consensus</h2>
+                    <p>Consensus helps students and researchers find 
+                        answers from scientific research papers using 
+                        AI-powered academic search
+                    </p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://consensus.app">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='research')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                <div class="tool-card">
+                <h2>Elicit</h2>
+                    <p>Elicit helps users search research papers,
+                    summarize studies, and collect evidence for academic 
+                    and scientific work</p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://elicit.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='research')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>ChatGPT</h2>
+                    <p>ChatGPT helps students with explanations, coding,
+                         assignments, summaries, research, and content generation.
+                    </p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='research')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                 <div class="tool-card">
+                    <h2>Scite</h2>
+                    <p>Scite AI helps researchers understand scientific papers
+                     by showing supporting and contrasting citations from other studies.  </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href= "https://scite.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='research')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+       ` }      
+       else if(tool == "quiz"){
+            document.getElementById("heading").innerHTML="Quiz Generator Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Quizizz</h2>
+                    <p>Quizzes helps teachers and students create interactive quizzes, 
+                        practice tests, and learning games with AI support.</p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://quizizz.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='quiz')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Kahoot</h2>
+                    <p>Kahoot is a game-based learning platform used for quizzes, 
+                        classroom activities, and interactive learning sessions.
+                    </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://kahoot.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='quiz')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                <div class="tool-card">
+                <h2>Quizlet</h2>
+                    <p>Quizlet helps students learn using flashcards, quizzes,
+                         practice tests, and AI-powered study tools.</p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://quizlet.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='quiz')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>chatgpt</h2>
+                    <p>ChatGPT helps students generate quizzes, 
+                    explanations, questions, answers, and study materials easily.
+                    </p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='quiz')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                 <div class="tool-card">
+                    <h2>Gemini</h2>
+                    <p>Gemini helps students create quizzes, summaries, 
+                    learning content, and explanations using Google AI.</p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://gemini.google.com" >
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='quiz')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+       ` }      
+       else if(tool == "exam"){
+            document.getElementById("heading").innerHTML="Exam Preparation Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Quizlet</h2>
+                    <p>Quizlet helps students prepare for exams using flashcards,
+                        practice tests, memorization tools, and AI study assistance.</p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://quizlet.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='exam')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Notion AI</h2>
+                    <p>Notion AI helps students organize notes, 
+                    create study plans, summarize content, and 
+                    manage exam preparation efficiently.
+                    </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.notion.so/product/ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='exam')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                <div class="tool-card">
+                <h2>Gemini</h2>
+                    <p>Gemini helps students prepare for exams with 
+                    summaries, explanations, learning resources, and 
+                    question generation.</p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='exam')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>ChatGPT</h2>
+                    <p>ChatGPT helps students with explanations, coding,
+                         assignments, summaries, research, and content generation.
+                    </p>
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='exam')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                 <div class="tool-card">
+                    <h2>RemNote</h2>
+                    <p>RemNote is a study and revision platform that uses spaced
+                    repetition and flashcards for effective exam preparation.</p>
+                    <p>Rating : ⭐4.6</p>
+                    <a href="https://www.remnote.com" >
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='exam')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+       ` }      
+          else if(tool == "notes"){
+            document.getElementById("heading").innerHTML="Notes Summarizer Tools";
+            document.getElementById("tools-container").innerHTML=`
+                
+            <div class="tool-card">
+                <h2>ChatGPt</h2>
+                    <p>ChatGPT helps students create
+                    notes, summaries, explanations,
+                    assignments and study material
+                    easily.</p>
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='notes')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>QuillBot</h2>
+                    <p>QuillBot helps students and writers paraphrase sentences,
+                    improve grammar, summarize notes, generate citations, 
+                    and enhance writing quality using AI
+                    </p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://quillbot.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='notes')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                <div class="tool-card">
+                <h2>Notion AI</h2>
+                    <p>Notion AI helps students organize notes,
+                        tasks and study plans efficiently.</p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.notion.so/product/ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='notes')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Deepseek AI</h2>
+                    <p>DeepSeek AI helps students with coding,
+                    problem solving and learning concepts.
+                    </p>
+                    <p>Rating : ⭐4.6</p>
+                    <a href="https://www.deepseek.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='notes')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                 <div class="tool-card">
+                    <h2>Gemini</h2>
+                    <p>Gemini helps students generate notes,
+                    answers and explanations quickly.
+                    </p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='notes')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+        
+        `;
+        }
+        else if(tool == "mind"){
+            document.getElementById("heading").innerHTML="MindMap Generator Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>XMind</h2>
+                    <p>XMind helps students and professionals create mind maps, brainstorm ideas, 
+                    organize concepts, and plan projects visually using AI-powered features.</p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://xmind.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='mind')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Miro</h2>
+                    <p>Miro is a collaborative online whiteboard platform 
+                    used for mind mapping, brainstorming, teamwork, flowcharts, 
+                    and project planning.
+                    </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://miro.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='mind')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                <div class="tool-card">
+                <h2>Whimsical</h2>
+                    <p>Whimsical helps users create mind maps, flowcharts, 
+                    wireframes, diagrams, and visual brainstorming boards with
+                     a simple drag-and-drop interface. </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://whimsical.com" >
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='mind')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Canva</h2>
+                    <p>Canva helps users design presentations, mind maps, 
+                    posters, graphics, and visual content easily using templates
+                        and AI-powered tools.
+                    </p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.canva.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='mind')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                 <div class="tool-card">
+                    <h2>Git Mind</h2>
+                    <p> GitMind is an AI-powered mind mapping and brainstorming 
+                        tool that converts notes, PDFs, videos, and ideas into visual 
+                        mind maps and summaries.
+                    </p>
+                    <p>Rating : ⭐4.6</p>
+                    <a href="https://gitmind.com" >
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='mind')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+       ` }      
+          else if(tool == "study"){
+            document.getElementById("heading").innerHTML="Study Planner Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Notion AI</h2>
+                    <p>Notion AI helps students create study plans, organize notes, 
+                    manage tasks, summarize content, and improve productivity.</p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.notion.so/product/ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='study')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Todolist</h2>
+                    <p>Todoist helps users manage daily tasks, study schedules, 
+                        reminders, and productivity planning efficiently.
+                    </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://todoist.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='study')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                <div class="tool-card">
+                <h2>Trello</h2>
+                    <p>Trello helps students organize study tasks, assignments, 
+                        projects, and schedules using boards and task management
+                         features.</p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://trello.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='study')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Gemini</h2>
+                    <p>Gemini helps students create study plans, summaries,
+                     schedules, and learning content using Google AI assistance.
+                    </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='study')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                 <div class="tool-card">
+                    <h2>Motion</h2>
+                    <p> Motion is an AI productivity and scheduling tool that
+                     automatically manages tasks, calendars, and study planning. </p>
+                    <p>Rating : ⭐4.6</p>
+                    <a href="https://www.usemotion.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='study')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+       ` }      
+      
+          else if(tool == "report"){
+            document.getElementById("heading").innerHTML="Report writing Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>ChatGPT</h2>
+                    <p>ChatGPT helps students generate reports, summaries, explanations, 
+                    research content, and academic writing assistance.</p>
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='report')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Claude AI</h2>
+                    <p>Claude AI helps users write reports, analyze documents, 
+                    summarize information, and generate detailed written content.
+                    </p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://claude.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='report')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                <div class="tool-card">
+                <h2>Grammarly</h2>
+                    <p>Grammarly helps improve grammar, spelling, clarity, tone, 
+                    and overall writing quality for reports and assignments.</p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.grammarly.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='report')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>QuillBot</h2>
+                    <p>QuillBot helps users paraphrase sentences, summarize content,
+                     improve writing, and enhance report quality using AI tools.
+                    </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://quillbot.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='report')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                 <div class="tool-card">
+                    <h2>Gemini</h2>
+                    <p>Gemini helps students and professionals generate reports, 
+                    summaries, explanations, and structured written content using AI.  </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='report')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+       ` }      
+      
+          else if(tool == "code"){
+            document.getElementById("heading").innerHTML="Code Generation Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>ChatGPt</h2>
+                    <p>ChatGPT helps developers generate code, debug programs,
+                    explain concepts, and build projects using AI-powered assistance.</p>
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='code')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Gemini</h2>
+                    <p>Gemini helps programmers write code, solve errors,
+                    generate algorithms, and assist with web and software
+                    development tasks.
+                    </p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='code')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                <div class="tool-card">
+                <h2>Replit AI</h2>
+                    <p>Replit AI helps developers build applications,
+                    generate code, test programs, and collaborate on
+                    coding projects directly in the browser.</p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://replit.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='code')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>BlackBox AI</h2>
+                    <p>Blackbox AI is an AI coding assistant that helps
+                    developers generate code, autocomplete programs,
+                     debug errors, and improve coding productivity.
+                    </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.blackbox.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='code')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                 <div class="tool-card">
+                    <h2>Claude AI</h2>
+                    <p>Claude AI helps developers write clean code,
+                    explain programming concepts, debug applications, 
+                    and generate detailed coding solutions with 
+                    strong reasoning ability.  </p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://claude.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='code')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+       ` }      
+      
+          else if(tool == "debug"){
+            document.getElementById("heading").innerHTML="Debug Code Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>BlackBox AI</h2>
+                    <p>Blackbox AI helps developers debug code, fix errors,
+                    generate solutions, and understand programming issues 
+                    quickly using AI assistance.</p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.blackbox.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='debug')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>ChatGPT</h2>
+                    <p>ChatGPT helps programmers identify coding errors,
+                    explain bugs, suggest fixes, and improve program logic
+                     across different programming languages.
+                    </p>
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='debug')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                
+
+
+                <div class="tool-card">
+                    <h2>Gemini</h2>
+                    <p>Gemini helps developers debug code, understand errors,
+                    optimize programs, and generate coding solutions using AI support.
+                    </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='debug')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                 <div class="tool-card">
+                    <h2>Cursor AI</h2>
+                    <p>Cursor AI is an AI-powered code editor that helps 
+                    developers debug applications, autocomplete code, refactor programs,
+                     and improve productivity.  </p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.cursor.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='debug')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+       ` }      
+          else if(tool == "explain"){
+            document.getElementById("heading").innerHTML="Code Explain Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>ChtGPt</h2>
+                    <p>ChatGPT helps developers understand code, explain programming concepts,
+                    break down complex logic, and learn coding step by step.</p>
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='explain')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Gemini</h2>
+                    <p>Gemini helps users explain code, understand algorithms,
+                    solve programming doubts, and learn software development concepts using AI.
+                    </p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='explain')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                <div class="tool-card">
+                <h2>Claude AI</h2>
+                    <p>Claude AI helps developers analyze code,
+                    explain large programs, understand logic flow, 
+                    and generate detailed coding explanations.</p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://claude.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='explain')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+               
+                 <div class="tool-card">
+                    <h2>BlackBox AI</h2>
+                    <p>Blackbox AI helps programmers understand code snippets,
+                    explain functions, debug programs, and improve coding productivity.  </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.blackbox.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='explain')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+       ` }      
+      
+              else if(tool == "dsa"){
+            document.getElementById("heading").innerHTML="DSA Practice Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>ChatGPT</h2>
+                    <p>ChatGPT helps students solve DSA problems, explain algorithms,
+                    understand data structures, and generate optimized coding solutions.</p>
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='dsa')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Gemini</h2>
+                    <p>Gemini helps users practice DSA by explaining algorithms,
+                    solving coding problems, and providing step-by-step programming guidance.
+                    </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='dsa')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                <div class="tool-card">
+                <h2>Claude AI</h2>
+                    <p>Claude AI helps students understand DSA concepts, 
+                    analyze coding problems, and generate clean algorithm explanations.</p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://claude.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='dsa')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Blackbox AI</h2>
+                    <p>Blackbox AI helps programmers solve coding problems,
+                    debug DSA programs, and improve coding productivity using AI assistance.
+                    </p>
+                    <p>Rating : ⭐4.6</p>
+                    <a href="https://www.blackbox.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='dsa')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+            
+       ` }      
+      
+              else if(tool == "sql"){
+            document.getElementById("heading").innerHTML="SQL Query Help Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>ChatGPT</h2>
+                    <p>ChatGPT helps users write SQL queries, understand database concepts,
+                    debug SQL errors, and generate optimized database solutions.</p>
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='sql')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Gemini</h2>
+                    <p>Gemini helps developers generate SQL queries,
+                    explain database logic, solve SQL errors, 
+                    and assist with database management tasks.
+                    </p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='sql')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                <div class="tool-card">
+                <h2>SQL AI</h2>
+                    <p>SQLAI helps users generate SQL queries automatically 
+                    from simple text instructions using artificial intelligence.</p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.sqlai.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='sql')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Claude AI</h2>
+                    <p>Claude AI helps developers understand SQL concepts,
+                    write database queries, debug SQL errors, 
+                    and explain complex database logic.
+                    </p>
+                    <p>Rating : ⭐4.6</p>
+                    <a href="https://claude.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='sql')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                 <div class="tool-card">
+                    <h2>AI2SQL</h2>
+                    <p>AI2SQL converts natural language into SQL queries 
+                    and helps developers create database queries quickly without manual coding.</p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.ai2sql.io">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='sql')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+       ` }      
+      
+              else if(tool == "web"){
+            document.getElementById("heading").innerHTML="Web Development Help Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>CodePen</h2>
+                    <p>CodePen is an online coding platform used for building and testing HTML, CSS,
+                    and JavaScript projects directly in the browser.</p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://codepen.io">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='web')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Replit AI</h2>
+                    <p>Replit AI helps developers generate code,
+                    build applications, debug programs, and collaborate on coding projects online.
+                    </p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://replit.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='web')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                <div class="tool-card">
+                <h2>ChatGPT</h2>
+                    <p>ChatGPT helps programmers generate code, debug errors, 
+                    explain programming concepts, and assist in software development task</p>
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='web')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Cursor AI</h2>
+                    <p>Cursor AI is an AI-powered code editor that helps developers write,
+                    edit, debug, and understand code efficiently.
+                    </p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.cursor.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='web')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                 <div class="tool-card">
+                    <h2>Bolt AI</h2>
+                    <p>Bolt AI helps developers quickly generate full-stack web applications
+                    and coding projects using AI-powered development tools.  </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://bolt.new">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='web')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+       ` } 
+           else if(tool == "python"){
+            document.getElementById("heading").innerHTML="Python Programming Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>ChatGPT</h2>
+                    <p>ChatGPT helps developers generate code, debug programs, explain concepts,
+                    and assist in software and web development.</p>
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='python')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Gemini</h2>
+                    <p>Gemini helps programmers write code, solve coding problems, explain algorithms,
+                    and improve development productivity using AI.
+                    </p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='python')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                <div class="tool-card">
+                <h2>Replit AI</h2>
+                    <p>Replit AI helps users build applications, generate code, debug projects, 
+                    and collaborate on coding directly in the browser.</p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://replit.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='python')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>BlackBox AI</h2>
+                    <p>Blackbox AI is an AI coding assistant that helps developers
+                    autocomplete code, debug applications, and generate programming solutions.
+                    </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.blackbox.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='python')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+            
+       ` }      
+      
+              else if(tool == "cpro"){
+            document.getElementById("heading").innerHTML="C Programming Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>ChatGPT</h2>
+                    <p>ChatGPT helps users generate content, explain concepts, 
+                    solve coding problems, summarize notes, and assist with learning 
+                    and productivity tasks.</p>
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cpro')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Claude AI</h2>
+                    <p>Claude AI helps users analyze documents, 
+                    write detailed content, explain concepts, 
+                    and assist with coding and research tasks.
+                    </p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://claude.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cpro')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                <div class="tool-card">
+                <h2>Gemini</h2>
+                    <p>Gemini is Google’s AI assistant 
+                    that helps users with coding, research, summaries, 
+                    content generation, and problem-solving tasks.</p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cpro')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Perplexity</h2>
+                    <p>Perplexity AI is an AI-powered search assistant 
+                    that provides real-time answers with sources 
+                    and citations for research and learning.
+                    </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.perplexity.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cpro')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+            
+       ` }      
+      
+              else if(tool == "java"){
+            document.getElementById("heading").innerHTML="Java Programming Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>ChatGPT</h2>
+                    <p>ChatGPT helps programmers generate code, debug applications,
+                    explain concepts, and build software development projects efficiently.</p>
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='java')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Perplexity</h2>
+                    <p>Perplexity AI helps programmers research coding concepts, 
+                    find technical solutions, and get AI-powered answers with sources.
+                    </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.perplexity.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='java')}}"
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                <div class="tool-card">
+                <h2>Claude AI</h2>
+                    <p>Claude AI helps developers understand code, 
+                    generate programming solutions, debug errors,
+                    and explain technical concepts clearly.</p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://claude.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='java')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Gemini</h2>
+                    <p>Gemini helps developers solve coding problems,
+                    generate programs, explain algorithms, and assist 
+                    in software development tasks.
+                    </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='java')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                 <div class="tool-card">
+                    <h2>Replit</h2>
+                    <p> Replit AI helps users write code, build applications,
+                    test programs, and collaborate on coding projects directly in the browser. </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://replit.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='java')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+       ` }      
+          else if(tool == "git"){
+            document.getElementById("heading").innerHTML="Github Readme Generator Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Readme.so</h2>
+                <p>ReadMe.so helps developers quickly create professional README files for 
+                    GitHub projects using simple templates and customization tools.</p>
+                    
+                    <p>Rating : ⭐4.6</p>
+                    <a href="https://readme.so">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='git')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>ChatGPT</h2>
+                    <p>ChatGPT helps developers generate README content,
+                    project descriptions, installation steps, 
+                    and documentation for software projects.
+                    </p>
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='git')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                <div class="tool-card">
+                <h2>Github Copilot</h2>
+                    <p>GitHub Copilot helps developers generate code,
+                    documentation, comments, 
+                    and README content directly inside coding environments.</p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://github.com/features/copilot">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='git')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                    <h2>Codeium</h2>
+                    <p>Codium AI helps developers generate documentation,
+                    improve code quality, create tests, 
+                    and assist in software development workflows.
+                    </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.qodo.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='git')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                 <div class="tool-card">
+                    <h2>Gemini</h2>
+                    <p>Gemini helps users generate README files,
+                    project explanations, coding documentation, 
+                    and technical content using AI assistance.  </p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='git')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+       ` }      
+      
+             else if(tool == "poster"){
+            document.getElementById("heading").innerHTML="Poster Design Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Leonardo AI</h2>
+                <p>Leonardo AI helps users generate AI-powered posters, digital artwork,
+                game assets, and creative visual designs with high-quality 
+                image generation tools.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://leonardo.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='poster')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>DALL.E</h2>
+                <p>DALL·E helps users create posters, illustrations, artwork,
+                and creative images from text prompts using artificial intelligence.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://openai.com/dall-e">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='poster')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Midjourney</h2>
+                <p>MidJourney is an AI image generation tool used for creating artistic posters,
+                cinematic visuals, digital art, and creative design content.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://www.midjourney.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='poster')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Ideogram AI</h2>
+                <p>Ideogram helps users generate posters, typography designs, 
+                social media graphics, and creative visual content using AI.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://ideogram.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='poster')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                  <div class="tool-card">
+                <h2>Stable Diffusion</h2>
+                <p>Stable Diffusion is an AI image generation model used for creating posters, 
+                artwork, illustrations, and high-quality visual designs from text prompts.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://stability.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='poster')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                
+       ` }      
+        else if(tool == "logo"){
+            document.getElementById("heading").innerHTML="Logo Design Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Looka AI</h2>
+                <p>Looka AI helps users create professional logos, brand kits,
+                business cards, and brand identities using artificial intelligence.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://looka.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='logo')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Logo AI</h2>
+                <p>LogoAI helps businesses and creators generate modern logos, branding designs, 
+                and visual identity content automatically using AI.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.logoai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='logo')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>BrandMark AI</h2>
+                <p>Brandmark AI helps users design unique logos, color schemes, 
+                and branding assets for startups, businesses, and personal brands.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://brandmark.io">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='logo')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Designs.ai</h2>
+                <p>Designs.ai is an AI-powered creative platform used for logo design, 
+                video creation, graphic design, and branding content generation.</p>
+                    
+                    <p>Rating : ⭐4.6</p>
+                    <a href="{{url_for('prompts',category='logo')}}">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="prompts.html">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                
+       ` }      
+
+        else if(tool == "thumb"){
+            document.getElementById("heading").innerHTML="Thumbnail Design Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Leonardo AI</h2>
+                <p>Leonardo AI helps creators generate attractive thumbnails, 
+                digital artwork, YouTube visuals, and creative graphic designs
+                 using AI-powered image generation.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://leonardo.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='thumb')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>DALL.E</h2>
+                <p>DALL·E helps users create unique thumbnails, illustrations, 
+                posters, and creative images from text prompts using artificial intelligence.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://openai.com/dall-e">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='thumb')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Midjourney</h2>
+                <p>MidJourney is an AI image generation tool used for creating cinematic thumbnails,
+                artistic visuals, and high-quality digital content.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://www.midjourney.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='thumb')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Ideogram AI</h2>
+                <p>Ideogram AI helps users create eye-catching thumbnails,
+                typography-based designs, and creative visual content using AI technology.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://ideogram.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='thumb')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                
+       ` }      
+        else if(tool == "banner"){
+            document.getElementById("heading").innerHTML="Banner Design Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Leonardo AI</h2>
+                <p>Leonardo AI helps users create professional banners, 
+                digital artwork, advertisements, and creative visual content
+                 using AI-powered image generation.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://leonardo.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='banner')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Midjourney</h2>
+                <p>MidJourney is an AI image generation platform 
+                used for creating cinematic banners, creative artwork, 
+                and high-quality visual designs.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://www.midjourney.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='banner')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>DALL.E</h2>
+                <p>DALL·E helps users generate banners, posters, 
+                illustrations, and custom visual content
+                 from text prompts using artificial intelligence.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://openai.com/dall-e">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='banner')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Ideogram AI</h2>
+                <p>Ideogram AI helps users design banners, typography-based graphics, 
+                social media visuals, and creative AI-generated images easily.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://ideogram.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='banner')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                
+       ` }      
+        else if(tool == "info"){
+            document.getElementById("heading").innerHTML="Infographic Maker";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Napkin AI</h2>
+                <p>Napkin AI helps users convert ideas and text into visual infographics, 
+                diagrams, and presentation-style graphics quickly using AI.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.napkin.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='banner')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Gamma AI</h2>
+                <p>Gamma AI helps users create professional infographics, presentations,
+                 documents, and visual storytelling content using AI-powered designs.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://gamma.app">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='banner')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Beautiful AI</h2>
+                <p>Beautiful AI helps users generate modern infographics, 
+                presentation slides, and visual content with 
+                smart AI-based formatting and layouts.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.beautiful.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='banner')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+    
+                
+       ` }      
+        else if(tool == "social"){
+            document.getElementById("heading").innerHTML="Social Media Post Design Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Predis AI</h2>
+                <p>Predis AI helps users create social media posts, advertisements, reels,
+                    captions, hashtags, banners, and marketing content automatically 
+                    using artificial intelligence. It also supports scheduling 
+                    and auto-posting features for social media management</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.predis.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='social')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Abode Firefly</h2>
+                <p>Adobe Firefly helps users generate social media posts, 
+                creative graphics, images, and AI-powered visual content 
+                for digital platforms.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://firefly.adobe.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='social')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Leonardo AI</h2>
+                <p>Leonardo AI helps creators generate social media posts,
+                 digital artwork, banners, thumbnails, and creative visual designs using AI.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://leonardo.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='social')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>DALL.E</h2>
+                <p>DALL·E helps users create AI-generated social media graphics, 
+                posters, illustrations, and creative images from text prompts.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://openai.com/dall-e">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='social')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                
+       ` }      
+        else if(tool == "present"){
+            document.getElementById("heading").innerHTML="Presentation Design Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Gamma AI </h2>
+                <p>Gamma AI helps users create presentations, documents, infographics, 
+                    and visual storytelling slides using AI-powered layouts.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://gamma.app">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='present')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Beautiful AI</h2>
+                <p>Beautiful AI automatically creates professional presentation slides with 
+                    smart templates, layouts, and modern visual designs.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.beautiful.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='present')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+
+                <div class="tool-card">
+                <h2>Slides AI</h2>
+                <p>SlidesAI converts text into professional presentation slides 
+                    automatically and helps users create PPTs quickly.</p>
+                    
+                    <p>Rating : ⭐4.6</p>
+                    <a href="https://www.slidesai.io">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='present')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                
+       ` }      
+        else if(tool == "ui/ux"){
+            document.getElementById("heading").innerHTML="UI/UX Inspiration Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Uizard AI</h2>
+                <p>Uizard AI helps designers create UI screens, wireframes, prototypes,
+                     and app designs automatically using AI-powered design generation.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://uizard.io">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='ui/ux')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Galileo AI</h2>
+                <p>Galileo AI helps users generate editable UI designs 
+                and Figma-ready interfaces from simple text prompts using artificial intelligence.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.usegalileo.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='ui/ux')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Visily AI</h2>
+                <p>Visily AI helps teams create wireframes, UI mockups, 
+                and collaborative interface designs quickly using AI-powered design tools.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.visily.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='ui/ux')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Figma AI</h2>
+                <p>Figma AI helps designers create layouts, generate UI components, 
+                    automate design tasks, and improve UI/UX workflows using AI features inside Figma</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.figma.com/ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='ui/ux')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                
+       ` }      
+        else if(tool == "image"){
+            document.getElementById("heading").innerHTML="Image Generation Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>DALL.E</h2>
+                <p>DALL·E helps users generate AI-powered images, artwork, posters, thumbnails, 
+                    and creative visual content from text prompts.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://openai.com/dall-e">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='image')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Midjourney</h2>
+                <p>MidJourney is an AI image generation platform used 
+                for creating cinematic artwork, digital illustrations, posters, 
+                and realistic visual designs.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://www.midjourney.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='image')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Leonardo AI</h2>
+                <p>Leonardo AI helps creators generate AI artwork, game assets, posters, 
+                thumbnails, and professional digital designs with advanced image generation tools.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://leonardo.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='image')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Ideogram AI</h2>
+                <p>Ideogram AI helps users create AI-generated images, typography designs, posters, 
+                    banners, and creative visual content easily.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://ideogram.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='image')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+               
+                <div class="tool-card">
+                <h2>Stable diffusion</h2>
+                <p>Stable Diffusion is an AI image generation model used for creating artwork, 
+                    illustrations, posters, and realistic images from text prompts.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://stability.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='image')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                
+       ` }      
+      
+           else if(tool == "resume"){
+            document.getElementById("heading").innerHTML="Resume Design Tools ";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Kickresume</h2>
+                <p>Kickresume helps users create professional resumes, CVs, 
+                and cover letters using AI-powered templates and resume writing assistance.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.kickresume.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='resume')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Rezi AI</h2>
+                <p>Rezi AI helps job seekers build ATS-friendly resumes, 
+                optimize keywords, generate resume content, 
+                and improve interview chances using artificial intelligence.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.rezi.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='resume')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Enhancv</h2>
+                <p>Enhancv helps users design modern resumes 
+                    with AI-powered writing suggestions, ATS optimization, 
+                    and customizable professional templates</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://enhancv.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='resume')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Teal AI</h2>
+                <p>Teal AI Resume Builder helps users create resumes, 
+                track job applications, optimize resumes for ATS systems,
+                and improve resume content using AI tools.</p>
+                    
+                    <p>Rating : ⭐4.6</p>
+                    <a href="https://www.tealhq.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='resume')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+            `}
+            else if(tool == "cresume"){
+            document.getElementById("heading").innerHTML="Resume Builder tools ";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>rezi AI</h2>
+                <p>Rezi AI helps users create ATS-friendly resumes, optimize keywords,
+                     and improve resume quality using AI assistance.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.rezi.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cresume')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>kickresume</h2>
+                <p>Kickresume helps users build professional resumes, 
+                cover letters, and personal websites using AI-powered templates.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.kickresume.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cresume')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Teal AI</h2>
+                <p>Teal AI Resume Builder helps users create resumes, 
+                    track job applications, and optimize resumes for ATS systems.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.tealhq.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cresume')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Enhacv</h2>
+                <p>Enhancv helps users design modern resumes with AI suggestions,
+                 customizable templates, and ATS optimization features.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://enhancv.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cresume')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Resume.io</h2>
+                <p>Resume.io helps users create resumes and 
+                cover letters quickly using professional templates and AI writing assistance.</p>
+                    
+                    <p>Rating : ⭐4.6</p>
+                    <a href="https://resume.io">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cresume')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+            `}
+              else if(tool == "cover"){
+            document.getElementById("heading").innerHTML="Cover Letter Generator Tools ";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>kickresume</h2>
+                <p>Kickresume helps users generate professional cover letters using
+                 AI-powered writing assistance and templates.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.kickresume.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cover')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Rezi AI</h2>
+                <p>Rezi AI helps job seekers create 
+                    ATS-friendly cover letters tailored to job roles and descriptions.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.rezi.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cover')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Teal AI</h2>
+                <p>Teal AI helps users write personalized cover letters 
+                and improve job application quality using AI tools.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.tealhq.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cover')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>ChatGPT</h2>
+                <p>ChatGPT helps users generate cover letters, 
+                    job application content, and professional writing assistance.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cover')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                
+                <div class="tool-card">
+                <h2>Gemini</h2>
+                <p>Gemini helps users create cover letters, professional content, 
+                    and job-related writing using Google AI.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cover')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+            `}
+              else if(tool == "interview"){
+            document.getElementById("heading").innerHTML="Interview Preparation Tools ";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>FinalRound AI</h2>
+                <p>Final Round AI helps users prepare for interviews with mock interviews, 
+                    AI feedback, and interview coaching tools.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.finalroundai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='interview')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Interview Warmup</h2>
+                <p>Interview Warmup by Google helps users practice interview questions 
+                    and improve communication skills using AI feedback.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://grow.google/certificates/interview-warmup">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='interview')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Pramp AI</h2>
+                <p>Pramp helps users practice coding and technical interviews through 
+                    mock interview sessions and AI-assisted preparation.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.pramp.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='interview')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>ChatGPT</h2>
+                <p>ChatGPT helps users prepare for interviews by generating HR questions,
+                     technical explanations, and mock interview practice.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='interview')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Gemini</h2>
+                <p>Gemini helps users prepare for interviews with 
+                AI-generated questions, answers, and communication guidance.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='interview')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+            `}
+              else if(tool == "hr"){
+            document.getElementById("heading").innerHTML="HR Questions Tools ";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>FinalRound AI </h2>
+                <p>Final Round AI helps users practice HR interview questions and 
+                    receive AI-based interview feedback.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.finalroundai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='hr')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Interview Warmup</h2>
+                <p>Interview Warmup helps users practice common HR 
+                    interview questions and improve speaking confidence.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://grow.google/certificates/interview-warmup">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='hr')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>ChatGPt</h2>
+                <p>ChatGPT helps users prepare HR interview answers, communication skills, 
+                    and behavioral interview responses.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='hr')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Claude AI</h2>
+                <p>Claude AI helps users generate thoughtful HR interview responses 
+                    and improve professional communication skills.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://claude.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='hr')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                
+                <div class="tool-card">
+                <h2>Gemini</h2>
+                <p>Gemini helps users practice HR interview questions 
+                    and generate professional answers using AI assistance.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='hr')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+            `}
+              else if(tool == "tech"){
+            document.getElementById("heading").innerHTML="Technical Interview prep Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Interviewing.io</h2>
+                <p>Interviewing.io helps developers prepare for technical interviews with 
+                    anonymous mock interviews and coding practice.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://interviewing.io">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='tech')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Pramp AI</h2>
+                <p>Pramp helps users practice coding interviews, DSA problems, 
+                    and technical communication through mock interviews.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.pramp.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='tech')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>FinalRound AI</h2>
+                <p>Final Round AI provides AI-powered interview coaching, 
+                    coding interview preparation, and technical interview feedback.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.finalroundai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='tech')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>ChatGPT</h2>
+                <p>ChatGPT helps developers solve coding questions, explain algorithms, 
+                    and prepare for technical interviews.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='tech')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                
+                <div class="tool-card">
+                <h2>Gemini</h2>
+                <p>Gemini helps users practice technical interview questions, coding concepts, 
+                    and software development topics.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='tech')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+            `}
+              else if(tool == "linkedin"){
+            document.getElementById("heading").innerHTML="LinkedINBio Creator Tools ";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Taplio AI</h2>
+                <p>Taplio AI helps users generate LinkedIn bios, social media posts, 
+                    and personal branding content using AI.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://taplio.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='linkedin')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Copy.AI</h2>
+                <p>Copy.ai helps users generate LinkedIn bios, marketing content, captions, 
+                    and professional writing using AI tools.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.copy.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='linkedin')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Jasper AI</h2>
+                <p>Jasper AI helps users create LinkedIn bios, social media content, blogs,
+                     and branding content using AI assistance.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.jasper.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='linkedin')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>ChatGPT</h2>
+                <p>ChatGPT helps users generate LinkedIn bios, profile summaries, 
+                    and professional branding content.</p>
+                    
+                    <p>Rating : ⭐4.</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='linkedin')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Gemini</h2>
+                <p>Gemini helps users create LinkedIn bios, professional summaries, 
+                    and career-related content using AI.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='linkedin')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+            `}
+              else if(tool == "portfolio"){
+            document.getElementById("heading").innerHTML="Portfolio Website Ideas Tools ";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Framer AI</h2>
+                <p>Framer AI helps users create portfolio websites, landing pages, 
+                    and modern UI designs using AI-powered website generation.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.framer.com/ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='portfolio')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Durable AI</h2>
+                <p>Durable AI helps users generate websites, portfolios, 
+                    and business pages automatically using artificial intelligence.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://durable.co">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='portfolio')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Loweb AI</h2>
+                <p>Lovable AI helps developers and creators generate 
+                    full-stack web applications and portfolio website ideas using AI.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://lovable.dev">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='portfolio')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Uizard AI</h2>
+                <p>Uizard AI helps users design portfolio interfaces, wireframes, 
+                    and app UI/UX layouts using AI design generation.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://uizard.io">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='portfolio')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                
+                <div class="tool-card">
+                <h2>Galileo AI</h2>
+                <p>Galileo AI helps users generate editable UI designs 
+                    and portfolio layouts from simple text prompts.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.usegalileo.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='portfolio')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+            `}
+              else if(tool == "cintern"){
+            document.getElementById("heading").innerHTML="Internship Guidance Tools ";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Teal AI</h2>
+                <p>Teal AI helps students manage internships, resumes, job tracking,
+                     and career planning using AI-powered tools.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.tealhq.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cintern')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>FinalRound AI</h2>
+                <p>Final Round AI helps students prepare for internship interviews 
+                    and improve job readiness with AI coaching.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.finalroundai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cintern')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>ChatGPT</h2>
+                <p>ChatGPT helps students with internship guidance, 
+                    resume preparation, interview practice, and career advice.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cintern')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+               
+                <div class="tool-card">
+                <h2>Gemini</h2>
+                <p>Gemini helps users explore internships, prepare applications,
+                     and improve professional skills using AI assistance.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cintern')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                
+                <div class="tool-card">
+                <h2>Claude AI</h2>
+                <p>Claude AI helps students with career guidance, internship preparation, 
+                    and professional communication support.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://claude.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cintern')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+            `}
+              else if(tool == "sop"){
+            document.getElementById("heading").innerHTML="SOP Writing Tools ";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Jasper AI</h2>
+                <p>Jasper AI helps users generate Statements of Purpose (SOPs), professional documents, 
+                    and academic writing using AI-powered content generation.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.jasper.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='sop')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Copy.ai</h2>
+                <p>Copy.ai helps users create SOPs, formal applications, 
+                    and professional writing content quickly using AI assistance.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.copy.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='sop')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>ChatGPT</h2>
+                <p>ChatGPT helps students and professionals write SOPs, 
+                    university applications, career statements, and formal documents effectively.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='sop')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+               
+                <div class="tool-card">
+                <h2>Gemini</h2>
+                <p>Gemini helps users generate SOPs, academic content, 
+                    and professional writing using AI-powered assistance.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='sop')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                
+                <div class="tool-card">
+                <h2>Claude AI</h2>
+                <p>Claude AI helps users create detailed SOPs, formal documents, 
+                    and professional application content with AI support.
+                    </p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://claude.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='sop')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+            `}
+              else if(tool == "cemail"){
+            document.getElementById("heading").innerHTML="Email Writing Tools ";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Flowrite AI</h2>
+                <p>Flowrite AI helps users generate professional emails, replies, 
+                    and business communication automatically using AI.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.flowrite.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cemail')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Compose AI</h2>
+                <p>Compose AI helps users write emails, documents, and messages faster 
+                    with AI-powered autocomplete and writing assistance.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.compose.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cemail')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>ChatGPT</h2>
+                <p>ChatGPT helps users write professional emails, replies, formal communication, 
+                    and business messages efficiently.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cemail')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+               
+                <div class="tool-card">
+                <h2>Gemini</h2>
+                <p>Gemini helps users generate emails, professional communication, 
+                    and workplace writing using Google AI.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cemail')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                
+                <div class="tool-card">
+                <h2>Claude AI</h2>
+                <p>Claude AI helps users draft professional emails, business communication, 
+                    and formal writing with detailed AI assistance.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://claude.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='cemail')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+            `}
+            else if(tool == "word"){
+            document.getElementById("heading").innerHTML="Word Document Creation Tools ";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>ChatGpt</h2>
+                <p>ChatGPT helps users create documents, reports, notes, letters, 
+                    and professional written content using AI assistance</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='word')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Gemini</h2>
+                <p>ChatGPT helps users create documents, reports, notes, letters, 
+                    and professional written content using AI assistance</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='word')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Claude AI</h2>
+                <p>Claude AI helps users create detailed documents, reports, 
+                    and professional writing with AI-powered assistance.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://claude.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='word')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+               
+                <div class="tool-card">
+                <h2>Notion AI</h2>
+                <p>Notion AI helps users create documents, notes, summaries,
+                    and organized workspace content using AI tools.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.notion.so/product/ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='word')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                
+                <div class="tool-card">
+                <h2>Microsoft Copilot</h2>
+                <p>Microsoft Copilot helps users generate Word documents, reports,
+                \and professional content inside Microsoft Office tools.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://copilot.microsoft.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='word')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+            `}
+             else if(tool == "pdf"){
+            document.getElementById("heading").innerHTML="PDF Summariser";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>ChatPDF</h2>
+                <p>ChatPDF helps users upload PDFs and get AI-generated summaries,
+                     explanations, and answers from documents.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.chatpdf.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='pdf')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Humata AI</h2>
+                <p>Humata AI helps users summarize PDFs, research papers, 
+                    and documents quickly using AI-powered analysis.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.humata.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='pdf')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>UPDF AI</h2>
+                <p>UPDF AI helps users summarize, explain, 
+                and interact with PDF documents using artificial intelligence.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://updf.com/ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='pdf')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+               
+                <div class="tool-card">
+                <h2>ChatGPT</h2>
+                <p>ChatGPT helps users summarize PDF content, explain topics, 
+                    and generate document insights.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='pdf')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                
+                <div class="tool-card">
+                <h2>Gemini</h2>
+                <p>Gemini helps users summarize PDF documents, notes, 
+                    and research content using AI assistance.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='pdf')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+            `}
+             else if(tool == "excel"){
+            document.getElementById("heading").innerHTML="Excel Sheet Help ";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Ajelix AI</h2>
+                <p>Ajelix AI helps users generate Excel formulas, automate spreadsheets, 
+                    and analyze data using AI tools.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://ajelix.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='excel')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Formula Bot</h2>
+                <p>Formula Bot helps users generate Excel formulas, SQL queries, 
+                    and spreadsheet automation using AI.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://formulabot.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='excel')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Microsoft Copilot</h2>
+                <p>Microsoft Copilot helps users analyze Excel data, 
+                    generate formulas, and automate spreadsheet tasks.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://copilot.microsoft.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='excel')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+               
+                <div class="tool-card">
+                <h2>ChatGPT</h2>
+                <p>ChatGPT helps users solve Excel problems, 
+                    generate formulas, and explain spreadsheet concepts.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='excel')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                
+                <div class="tool-card">
+                <h2>Gemini</h2>
+                <p>Gemini helps users create formulas, analyze spreadsheets, 
+                    and automate Excel-related tasks using AI.</p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href=>
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='excel')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+            `}
+             else if(tool == "spread"){
+            document.getElementById("heading").innerHTML="Spreadsheet Formulas ";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>FormulaBot</h2>
+                <p>Formula Bot helps users generate spreadsheet formulas, automate calculations, 
+                    and simplify Excel tasks using AI.</p> 
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://formulabot.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='spread')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Ajelix AI</h2>
+                <p>Ajelix AI helps users generate formulas, analyze spreadsheet data, 
+                    and automate reporting tasks.</p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://ajelix.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='spread')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Sheet AI</h2>
+                <p>SheetAI helps users use AI directly inside spreadsheets
+                     for generating formulas and automating sheet operations.</p>
+                    <p>Rating : ⭐4.6</p>
+                    <a href="https://www.sheetai.app">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='spread')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+               
+                <div class="tool-card">
+                <h2>ChatGPT</h2>
+                <p>ChatGPT helps users understand spreadsheet formulas, 
+                    fix errors, and automate calculations.</p>
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='spread')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                
+                <div class="tool-card">
+                <h2>Gemini</h2>
+                <p>Gemini helps users generate spreadsheet formulas 
+                    and solve Excel-related problems using AI.</p>  
+                    <p>Rating : ⭐4.8</p>
+                    <a href="{{url_for('prompts',category='spread')}}">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="prompts.html">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+            `}
+             else if(tool == "doc"){
+            document.getElementById("heading").innerHTML="Document Formatting Tools ";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>notion AI</h2>
+                <p>Notion AI helps users organize and format documents, notes, 
+                    and workspace content efficiently.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.notion.so/product/ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='doc')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2><Microsoft Copilot/h2>
+                <p>Microsoft Copilot helps users format Word documents, presentations, 
+                    and Office files using AI assistance.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://copilot.microsoft.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='doc')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Grammarly</h2>
+                <p>Grammarly AI helps users improve grammar, formatting, clarity, 
+                    and professional writing quality.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.grammarly.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='doc')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+               
+                <div class="tool-card">
+                <h2>ChatGPT</h2>
+                <p>ChatGPT helps users structure and format reports, documents, 
+                    and professional content effectively.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='doc')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                
+                <div class="tool-card">
+                <h2>Gemini</h2>
+                <p>Gemini helps users improve document formatting and 
+                    generate professional written content.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='doc')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+            `}
+             else if(tool == "pdfconvert"){
+            document.getElementById("heading").innerHTML="PDF Converter ";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Acrobat AI Assistant</h2>
+                    <p>Acrobat AI Assistant helps users convert, summarize, edit, 
+                        and manage PDF documents using AI tools.</p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.adobe.com/acrobat/ai-assistant.html">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='pdfconvert')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>UPDF AI</h2>
+                <p>UPDF AI helps users convert, summarize, and interact
+                     with PDF files using artificial intelligence.</p>
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://updf.com/ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='pdfconvert')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>SmallPdf AI</h2>
+                <p>SmallPDF AI helps users convert, compress, edit, 
+                    and manage PDF files easily online.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://smallpdf.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='pdfconvert')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+               
+                <div class="tool-card">
+                <h2>iLOVE PDF AI</h2>
+                <p>iLovePDF AI helps users merge, convert, compress, 
+                    and edit PDF documents quickly.</p>
+                    
+                    <p>Rating : ⭐4.6</p>
+                    <a href="https://www.ilovepdf.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='pdfconvert')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                
+                <div class="tool-card">
+                <h2>PDF gear AI</h2>
+                <p>PDFgear AI helps users edit, summarize, convert, 
+                    and manage PDF documents using AI-powered tools.</p>
+                    
+                    <p>Rating : ⭐4.6</p>
+                    <a href="https://www.pdfgear.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='pdfconvert')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+            `}
+             else if(tool == "reportformat"){
+            document.getElementById("heading").innerHTML="Report Formatting Tools ";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Grammarly</h2>
+                <p>Grammarly AI helps users improve report grammar, clarity, formatting, 
+                    and professional writing quality.</p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.grammarly.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='reportformat')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Notion AI</h2>
+                <p>Notion AI helps users organize and structure reports, notes, 
+                    and documents efficiently.</p>        
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://www.notion.so/product/ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='reportformat')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>ChatGPT</h2>
+                <p>ChatGPT helps users generate and format reports, summaries, 
+                    and professional documents.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='reportformat')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+               
+                <div class="tool-card">
+                <h2>Gemini</h2>
+                <p>Gemini helps users create and improve reports with AI-generated formatting 
+                    and writing assistance.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='reportformat')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                
+                <div class="tool-card">
+                <h2>Claude AI</h2>
+                <p>Claude AI helps users create detailed reports and 
+                    professional documents with AI support.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://claude.ai">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='reportformat')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+            `}
+             else if(tool == "doctrans"){
+            document.getElementById("heading").innerHTML="Document Translation Tools ";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>DeepL</h2>
+                <p>DeepL helps users translate documents and text accurately into multiple languages 
+                    using AI translation technology.</p>
+                    
+                    <p>Rating : ⭐4.9</p>
+                    <a href="https://www.deepl.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='doctrans')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Google Translate AI</h2>
+                <p>Google Translate helps users translate text, documents, 
+                    and websites into different languages instantly.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://translate.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='doctrans')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Microsoft Translator AI</h2>
+                <p>Microsoft Translator helps users translate documents, conversations, 
+                    and text using AI-powered translation tools.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://translator.microsoft.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='doctrans')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+               
+                <div class="tool-card">
+                <h2>ChatGPT</h2>
+                <p>ChatGPT helps users translate text and explain meanings
+                     across multiple languages.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://chat.openai.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='doctrans')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                
+                <div class="tool-card">
+                <h2>Gemini</h2>
+                <p>Gemini helps users translate and understand multilingual 
+                    content using AI assistance.</p>
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://gemini.google.com">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='doctrans')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+            `}
+             else if(tool == "ocr"){
+            document.getElementById("heading").innerHTML=" OCR/Text extraction Tools";
+            document.getElementById("tools-container").innerHTML=`
+            <div class="tool-card">
+                <h2>Nanonets OCR</h2>
+                <p>Nanonets OCR helps users extract text from images, PDFs, invoices, 
+                    and scanned documents using AI OCR technology.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://nanonets.com/ocr">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='ocr')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Acrobat OCR AI</h2>
+                <p>Adobe Acrobat OCR helps users scan PDFs and extract 
+                    editable text from documents and images.</p>
+                    
+                    <p>Rating : ⭐4.8</p>
+                    <a href="https://www.adobe.com/acrobat">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='ocr')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                <h2>Google Lens</h2>
+                <p>Google Lens helps users scan images and extract text, translate content, 
+                    and identify objects using AI vision technology.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://lens.google">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='ocr')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+               
+                <div class="tool-card">
+                <h2>OCR space</h2>
+                <p>OCR.Space helps users convert images and scanned documents 
+                    into editable text using OCR technology.</p>
+                    
+                    <p>Rating : ⭐4.6</p>
+                    <a href="https://ocr.space">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='ocr')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+                
+                <div class="tool-card">
+                <h2>Microsoft OCR AI</h2>
+                <p>Microsoft OCR AI helps users extract text from images and documents 
+                    using AI-powered computer vision services.</p>
+                    
+                    <p>Rating : ⭐4.7</p>
+                    <a href="https://azure.microsoft.com/en-us/products/ai-services/ai-vision">
+                        <button class="tool-btn">Visit tool</button>
+                    </a>
+                    <a href="{{url_for('prompts',category='ocr')}}">
+                        <button class="prompt-btn">Get Prompt</button>
+                    </a>
+                </div>
+
+            `}
+          
+    </script>    
+    </div>
+</body>
+</html>

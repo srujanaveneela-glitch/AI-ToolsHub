@@ -1,0 +1,92 @@
+h1{
+ text-align: center;
+ color: aqua;
+ margin-top: 0px;   
+}
+#tools-container{
+    margin-top: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+.tool-card{
+    width:600px;
+    background-color: rgba(135,206,235,0.12);
+    border-radius: 20px;
+    border: 2px solid #00e5ff;
+    transition: 0.3s;
+    padding:20px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0,229,225,0.2);
+}
+.tool-card:hover{
+    transform:scale(0.95);
+     box-shadow:0 0 20px #00e5ff;
+}
+.tool-card  h2{
+    font-size: 20px;
+    color:white;
+
+}
+.tool-card  p{
+    font-size: 15px;
+    color: #7dd3fc;
+}
+a{
+    text-decoration: none;
+}
+.tool-btn{
+    border-radius: 12px;
+    border-color: blue;
+    background-color: #00e5ff;
+    color:black;
+    font-size: 15px;
+    padding: 15px 20px;
+    margin-right: 10px;
+    cursor:pointer;
+}
+.prompt-btn{
+    border-radius: 12px;
+    border-color: blue;
+    background-color: #00e5ff;
+    color:black;
+    font-size: 15px;
+    padding: 15px 20px;
+    margin-right: 10px;
+    cursor:pointer;
+
+}
+.tool-btn:hover{
+    transform:scale(1.05);
+     box-shadow:0 0 20px #00e5ff;
+   
+}
+.prompt-btn:hover{
+    transform: scale(1.05);
+    box-shadow:0 0 20px #00e5ff;
+}
+.tool-btn:active{
+    color:indigo;
+}
+.prompt-btn:active{
+    color: indigo;
+}
+@media(max-width:768px){
+    .tool-card{
+        width:95%;
+        padding:20px 15px;
+    }
+    .tool-card h2{
+        font-size:22px;
+    }
+    .tool-card p{
+        font-size:15px;
+    }
+    .tool-btn,
+    .prompt-btn{
+        width:100%;
+        margin-top:10px;
+    }
+
+}
