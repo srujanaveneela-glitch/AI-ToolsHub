@@ -5,9 +5,8 @@ import sqlite3
 app = Flask(__name__)
 app.secret_key = 'sl137'
 app.permanent_session_lifetime=timedelta(days=30)
-
 def init_db():
-    with sqlite3.connect('AI-toolshub.db') as con:
+    with sqlite3.connect('/tmp/AI-toolshub.db') as con:
         cur = con.cursor()
 
         cur.execute('''CREATE TABLE IF NOT EXISTS USERS (
@@ -31,6 +30,7 @@ def init_db():
                     visited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                     )''')
         con.commit()
+init_db() 
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -41,7 +41,7 @@ def register():
         email = request.form['email']
         password = request.form['password']
         try:
-            with sqlite3.connect('AI-toolshub.db') as con:
+            with sqlite3.connect('/tmp/AI-toolshub.db') as con:
                 cur = con.cursor()
                 cur.execute('''
                     INSERT INTO USERS
@@ -62,7 +62,7 @@ def login():
         try:
             email = request.form['email']
             password = request.form['password']
-            with sqlite3.connect('AI-toolshub.db') as con:
+            with sqlite3.connect('/tmp/AI-toolshub.db') as con:
                 cur = con.cursor()
                 cur.execute('''
                     SELECT * FROM USERS
@@ -90,7 +90,7 @@ def forgotpassword():
         newpassword = request.form["newpassword"]
         confirmpassword = request.form["confirmpassword"]
         if newpassword == confirmpassword:
-            with sqlite3.connect('AI-toolshub.db') as con:
+            with sqlite3.connect('/tmp/AI-toolshub.db') as con:
                 cur = con.cursor()
                 cur.execute(
                 "UPDATE USERS SET password=? WHERE email=?",
@@ -129,7 +129,7 @@ def visit_tool():
     tool_name=request.args.get('name')
     tool_url=request.args.get('url')
     user_id=session['user_id']
-    with sqlite3.connect('AI-toolshub.db')as con:
+    with sqlite3.connect('/tmp/AI-toolshub.db')as con:
         cur=con.cursor()
         cur.execute(""" INSERT INTO RECENT_TOOLS(user_id,tool_name,tool_url)VALUES(?,?,?)""",(user_id,tool_name,tool_url))
         con.commit()
@@ -139,7 +139,7 @@ def recent_tools():
     if 'user_id' not in session:
         return redirect(url_for('login'))
     user_id=session['user_id']
-    with sqlite3.connect('AI-toolshub.db')as con:
+    with sqlite3.connect('/tmp/AI-toolshub.db')as con:
         cur=con.cursor()
         cur.execute("""SELECT tool_name,tool_url FROM RECENT_TOOLS WHERE user_id=? ORDER BY visited_at DESC LIMIT 20""",(user_id,))
         recent=cur.fetchall()
@@ -150,7 +150,7 @@ def tools():
     tool=request.args.get("tools")
     favourites=[]
     if 'user_id' in session:
-        with sqlite3.connect('AI-toolshub.db')as con:
+        with sqlite3.connect('/tmp/AI-toolshub.db')as con:
             cur=con.cursor()
             cur.execute('''SELECT item_name FROM FAVOURITES WHERE user_id=?''',(session['user_id'],))
             favourites=[row[0] for row in cur.fetchall()]
@@ -172,7 +172,7 @@ def favourite():
     item_name=request.form['item_name']
     item_type=request.form['item_type']
     item_url=request.form.get('item_url')
-    with sqlite3.connect('AI-toolshub.db') as con:
+    with sqlite3.connect('/tmp/AI-toolshub.db') as con:
         cur=con.cursor()
         cur.execute('''SELECT * FROM FAVOURITES WHERE user_id=? AND item_name=?''',(session['user_id'],item_name))
         existing=cur.fetchone()
@@ -188,7 +188,7 @@ def favourite():
 def myfavourites():
     if 'user_id' not in session:
         return redirect(url_for('login'))
-    with sqlite3.connect('AI-toolshub.db') as con:
+    with sqlite3.connect('/tmp/AI-toolshub.db') as con:
         cur = con.cursor()
         cur.execute(
             '''
@@ -200,5 +200,4 @@ def myfavourites():
     )
 
 if __name__== "__main__":
-    init_db()
     app.run(debug=True)
