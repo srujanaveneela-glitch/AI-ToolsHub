@@ -30,6 +30,7 @@ def init_db():
                     tool_url TEXT,
                     visited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                     )''')
+        con.commit()
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -58,26 +59,29 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-        with sqlite3.connect('AI-toolshub.db') as con:
-            cur = con.cursor()
-            cur.execute('''
-                SELECT * FROM USERS
-                WHERE email=? AND password=?
-            ''', (email, password))
-            user = cur.fetchone()
-        if user:
-            session.permanent=True
-            session['logged_in'] = True
-            session['user_id'] = user[0]
-            session['username'] = user[1]
-            return redirect(url_for('dashboard'))
-        else:
-            return render_template(
+        try:
+            email = request.form['email']
+            password = request.form['password']
+            with sqlite3.connect('AI-toolshub.db') as con:
+                cur = con.cursor()
+                cur.execute('''
+                    SELECT * FROM USERS
+                    WHERE email=? AND password=?
+                    ''', (email, password))
+                user = cur.fetchone()
+            if user:
+                session.permanent=True
+                session['logged_in'] = True
+                session['user_id'] = user[0]
+                session['username'] = user[1]
+                return redirect(url_for('dashboard'))
+            else:
+                return render_template(
                 'login.html',
                 error="Invalid email or password!"
             )
+        except Exception as e:
+            return f"Login error:{str(e)}"
     return render_template('login.html')
 @app.route("/forgotpassword", methods=["GET","POST"])
 def forgotpassword():
