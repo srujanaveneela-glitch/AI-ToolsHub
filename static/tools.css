@@ -57,6 +57,18 @@ a{
     cursor:pointer;
 
 }
+.heart-btn{
+    font-size:40px;
+    cursor:pointer;
+    margin-left:15px;
+    vertical-align:middle ;
+    user-select: none;
+    transition: 0.3s;
+    color:#555;
+}
+.heart-btn:hover{
+    transform:scale(1.15);
+}
 .tool-btn:hover{
     transform:scale(1.05);
      box-shadow:0 0 20px #00e5ff;
@@ -87,6 +99,10 @@ a{
     .prompt-btn{
         width:100%;
         margin-top:10px;
+    }
+    .heart-btn{
+        font-size:35px;
+        margin-left:10px;
     }
 
 }

@@ -9,16 +9,17 @@
     
 </head>
 <body>
+    
     <nav class="navbar">
         <div class="logo">AI Tools Hub</div>
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         <ul class="nav-links" id="nav-links">
             <li><a href="{{ url_for('home') }}">Home</a></li>
-            <li><a href="{{ url_for('register')}}">Study</a></li>
-            <li><a href="{{ url_for('register')}}">Coding</a></li>
-            <li><a href="{{ url_for('register')}}">Design</a></li>
-            <li><a href="{{ url_for('register')}}">Career</a></li>
-            <li><a href="{{ url_for('register')}}">Document</a></li>
+            <li><a href="{{ url_for('login')}}">Study</a></li>
+            <li><a href="{{ url_for('login')}}">Coding</a></li>
+            <li><a href="{{ url_for('login')}}">Design</a></li>
+            <li><a href="{{ url_for('login')}}">Career</a></li>
+            <li><a href="{{ url_for('login')}}">Document</a></li>
             <li><a href="{{url_for('register')}}" class="get-btn">Get Started</a></li>
         </ul>
     </nav>
@@ -32,7 +33,7 @@
             <p>Discover the best AI tools for 
                 Studying, coding, designing, career growth, and document management.
             </p>
-            <a href="{{url_for('register')}}">
+            <a href="{{url_for('login')}}">
                 <button class="hero-btn">Explore tools ➜</button>
             </a>
         </div>
@@ -40,31 +41,31 @@
 
             <h2>------------- Explore Top Categories--------------</h2>
             <section class="categories">
-                <a href="{{url_for('register')}}" class="card-link">
+                <a href="{{url_for('login')}}" class="card-link">
                     <div class="card">
                     <h2>Study</h2>
                     <p>AI tools for notes, quizzes, PPTs, summaries, and exam preparation.</p>
                     </div>
                 </a>
-                <a href="{{url_for('register')}}" class="card-link">
+                <a href="{{url_for('login')}}" class="card-link">
                     <div class="card">
                     <h2>Coding</h2>
                     <p>AI tools for code generation, debugging, DSA, and programming help.</p>
                     </div>
                 </a>
-                <a href="{{url_for('register')}}" class="card-link">
+                <a href="{{url_for('login')}}" class="card-link">
                     <div class="card">
                     <h2>Design</h2>
                     <p>AI tools for logo creation, poster design , UI/UX Inspiration, and Social media content creation.</p>
                     </div>
                 </a>
-                <a href="{{url_for('register')}}" class="card-link">
+                <a href="{{url_for('login')}}" class="card-link">
                     <div class="card">
                     <h2>Career</h2>
                     <p>AI tools for Resume building, Interview Preparation, Linkedin bio creation, and internship guidance.</p>
                     </div>
                 </a>
-                <a href="{{url_for('register')}}" class="card-link">
+                <a href="{{url_for('login')}}" class="card-link">
                     <div class="card">
                     <h2>Document</h2>
                     <p>AI tools for PDF summarisation, document formatting, translation,OCR extraction and report generation.</p>

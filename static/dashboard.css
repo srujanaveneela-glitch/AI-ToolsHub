@@ -4,7 +4,7 @@ body{
 h1{
     text-align: center;
     color: aqua;
-    margin-top: 40px;
+    margin-top: 20px;
     margin-bottom:40px ;
     font-size: 40px;
 }
@@ -63,6 +63,8 @@ h1{
     padding: 15px 40px;
     background-color:rgba(135,206,235,0.12);
     border-bottom: 2px solid #00e5ff;
+    top:0;
+    z-index:1001;
 }
 
 .logo{
@@ -70,21 +72,20 @@ h1{
     font-size: 28px;
     font-weight: bold;
 }
-.nav-links{
-    list-style:none ;
-    display:flex;
-    gap: 25px;
-
+.about{
+    margin:50px;
+    text-align:center;
+    color: aqua;
+    padding: 15px;
 }
-.nav-links li a{
+.about-link{
     text-decoration: none;
     color: white;
     font-size: 18px;
     transition: 0.3s;
 }
-.nav-links li a:hover{
-    color: aqua;
-    box-shadow: 0 0 25px rgba(0,229,255,0.7);
+.about-link:hover{
+    color:aqua;
 }
 footer{
     margin-top: 100px;
@@ -92,17 +93,83 @@ footer{
     padding: 15px;
     text-align: center;
 }
-.about{
-    margin: 50px;
-    text-align: center;
-    color:aqua;
-    padding:15px;
-}
 .menu-toggle{
     display: none;
     font-size: 30px;
     color: white;
     cursor: pointer;
+}
+.sidebar{
+    width:250px;
+    height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+    margin-top: 70px;
+    background:#050816;
+    border-right:2px solid #00e5ff;
+    overflow-y:auto;
+    z-index:999;
+    padding-top:80px;
+}
+.profile-section{
+    text-align:center;
+    padding:20px;
+    border-bottom:1px solid rgba(255,255,255,0.2);
+}
+.profile-avatar{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    background:rgba(135,206,235,0.12);
+    border:2px solid #00e5ff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:35px;
+    margin:auto;
+    color:white;
+}
+.profile-section h3{
+    color:white;
+    margin-top:15px;
+}
+.profile-section p{
+    color:#38bdf8;
+    font-size:14px;
+    word-break:break-word;
+}
+.sidebar a,
+.category-btn{
+    display:block;
+    width:100%;
+    padding:15px 20px;
+    text-decoration:none;
+    color:white;
+    background:none;
+    border:none;
+    text-align:left;
+    cursor:pointer;
+    font-size:16px;
+    box-sizing:border-box;
+}
+.sidebar a:hover,
+.category-btn:hover{
+    background:rgba(135,206,235,0.12);
+}
+.categories{
+    display: none;
+}
+.categories.show{
+    display: block;
+}
+.categories a{
+    padding-left: 40px;
+}
+.main-content{
+    margin-left:250px;
+    padding: 20px;
+    padding-top: 70px;
 }
 .logout-btn{
     background-color: #ff4d4d;
@@ -114,41 +181,48 @@ footer{
     background: #ff3333;
     box-shadow: 0 0 10px #ff4d4d;
 }
+.overlay{
+    display: none;
+}
+.overlay.active{
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height:100%;
+    background:rgba(0,0,0,0.5);
+    z-index: 1500;
+}
 @media(max-width:768px){
     .menu-toggle{
         display: block;
     }
-    .nav-links{
-        position: absolute;
-        top:70px;
-        left: 0;
-        width: 100%;
-        background-color: #050816;
-        flex-direction: column;
-        text-align: center;
-        padding: 20px 0;
-        display: none;
-        z-index:1000;
-        border-top: 2px solid #00e5ff;
+    .navbar{
+        padding:15px 20px;
     }
-    .nav-links.active{
-        display: flex;
-    
+    .logo{
+        font-size: 22px;
     }
-    .nav-links li{
-        margin: 15px 0;
+    .sidebar{
+        width:280px;
+        max-width: 320px;
+        left:-250px;
+        transition: 0.3s;
+        z-index:2000;
+    }
+    .sidebar.active{
+        left:0;
+    }
+    .main-content{
+        margin-left:0;
+        padding-top: 80px;
     }
     h1{
         font-size: 28px;
         padding:0 15px;
     }
-    .navbar{
-        padding: 15px 20px;
-    }
-    .nav-links{
-        left:0;
 
-    }
     .card-container{
         width: 100%;
         padding:0 15px;

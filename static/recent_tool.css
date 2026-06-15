@@ -1,0 +1,31 @@
+h1{
+    text-align: center;
+    color: #00e5ff;
+}
+p{
+    color: white;
+    text-align: center;
+}
+.tool-card{
+    width:90%;
+    max-width: 700px;
+    margin: 15px auto;
+    padding: 20px;
+    border:2px solid #00e5ff;
+    border-radius: 15px;
+    background-color: rgba(135,206,235,0.12);
+    text-align: center;
+}
+.tool-card h2{
+    color: aqua;
+}
+.tool-card a{
+    display:inline-block;
+    margin-top:10px;
+    padding: 10px 20px;
+    background-color: #00e5ff;
+    color: black;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}

@@ -20,6 +20,36 @@
     </div>
     <h1 id="heading"></h1>
     <hr>
+    <script>
+  let userFavourites = JSON.parse('{{ favourites | tojson | safe }}');
+
+  function toggleHeart(element) {
+    let card = element.closest(".tool-card") || element.closest(".prompt-card");
+    let itemName = card.querySelector("h2").innerText.trim();
+    let itemType = card.classList.contains("tool-card") ? "tool" : "prompt";
+    let itemUrl = card.querySelector("a")?.getAttribute("href");
+
+    fetch("/favourites", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        item_name: itemName,
+        item_type: itemType,
+        item_url: itemUrl
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === "added") {
+        element.innerHTML = "❤️";
+        userFavourites.push(itemName);
+      } else if (data.status === "removed") {
+        element.innerHTML = "♡";
+        userFavourites = userFavourites.filter(n => n !== itemName);
+      }
+    });
+  }
+</script>
     <div class="box">
     <div id="tools-container"></div>
     <script>
@@ -35,9 +65,10 @@
                     assignments and study material
                     easily.</p>
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='notebook')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -50,9 +81,10 @@
                     summaries and study materials easily.
                     </p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://notebooklm.google.com">
+                    <a href="/visit_tool?name=NotebookLM&url=https://notebooklm.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='notebook')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -62,9 +94,10 @@
                     <p>Notion AI helps students organize notes,
                         tasks and study plans efficiently.</p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.notion.so/product/ai">
+                    <a href="/visit_tool?name=Notion AI&url=https://www.notion.so/product/ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='notebook')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -77,9 +110,10 @@
                     problem solving and learning concepts.
                     </p>
                     <p>Rating : ⭐4.6</p>
-                    <a href="https://www.deepseek.com">
+                    <a href="/visit_tool?name=DeepSeek AI&url=https://www.deepseek.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='notebook')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -91,9 +125,10 @@
                     answers and explanations quickly.
                     </p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='notebook')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -111,9 +146,10 @@
                     assignments and study material
                     easily.</p>
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='assignment')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -126,9 +162,10 @@
                      improve writing and create better assignments.
                     </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://quillbot.com">
+                    <a href="/visit_tool?name=QuillBot&url=https://quillbot.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='assignment')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -138,9 +175,10 @@
                     <p> Grammarly helps students correct grammar,
                     spelling and improve professional writing.</p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.grammarly.com" >
+                    <a href="/visit_tool?name=Grammarly&url=https://www.grammarly.com" >
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='assignment')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -153,9 +191,10 @@
                     answers and explanations quickly.
                     </p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='assignment')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -167,9 +206,10 @@
                      summaries and detailed explanations easily.
                     </p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://claude.ai" >
+                    <a href="/visit_tool?name=Claude AI&url=https://claude.ai" >
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='assignment')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -183,9 +223,10 @@
                     <p>Gamma AI helps create presentations, notes, 
                         and documents using AI-generated layouts and modern designs.</p>
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://gamma.app">
+                    <a href="/visit_tool?name=Gamma AI&url=https://gamma.app">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='ppt')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -198,9 +239,10 @@
                          resumes, social media posts, and graphics easily.
                     </p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.canva.com">
+                    <a href="/visit_tool?name=Canva AI&url=https://www.canva.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='ppt')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -213,9 +255,10 @@
                          slides with smart formatting and templates.
                     </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.beautiful.ai">
+                    <a href="/visit_tool?name=Beautiful AI&url=https://www.beautiful.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='ppt')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -226,9 +269,10 @@
                     <p> Slides AI converts text into presentation slides automatically
                          and helps save time while creating PPTs. </p>
                     <p>Rating : ⭐4.6</p>
-                    <a href="https://www.slidesai.io" >
+                    <a href="/visit_tool?name=Slides AI&url=https://www.slidesai.io" >
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='ppt')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -243,9 +287,10 @@
                         provides answers with sources, citations, and real-time
                          web information for research and learning.</p>
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://www.perplexity.ai">
+                    <a href="/visit_tool?name=Perplexity AI&url=https://www.perplexity.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='research')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -259,9 +304,10 @@
                         AI-powered academic search
                     </p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://consensus.app">
+                    <a href="/visit_tool?name=Consensus&url=https://consensus.app">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='research')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -272,9 +318,10 @@
                     summarize studies, and collect evidence for academic 
                     and scientific work</p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://elicit.com">
+                    <a href="/visit_tool?name=Elicit&url=https://elicit.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='research')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -287,9 +334,10 @@
                          assignments, summaries, research, and content generation.
                     </p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='research')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -300,9 +348,10 @@
                     <p>Scite AI helps researchers understand scientific papers
                      by showing supporting and contrasting citations from other studies.  </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href= "https://scite.ai">
+                    <a href= "/visit_tool?name=Scite&url=https://scite.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='research')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -316,9 +365,10 @@
                     <p>Quizzes helps teachers and students create interactive quizzes, 
                         practice tests, and learning games with AI support.</p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://quizizz.com">
+                    <a href="/visit_tool?name=Quizizz&url=https://quizizz.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='quiz')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -331,9 +381,10 @@
                         classroom activities, and interactive learning sessions.
                     </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://kahoot.com">
+                    <a href="/visit_tool?name=Kahoot&url=https://kahoot.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='quiz')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -343,9 +394,10 @@
                     <p>Quizlet helps students learn using flashcards, quizzes,
                          practice tests, and AI-powered study tools.</p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://quizlet.com">
+                    <a href="/visit_tool?name=Quizlet&url=https://quizlet.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='quiz')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -358,9 +410,10 @@
                     explanations, questions, answers, and study materials easily.
                     </p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='quiz')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -371,9 +424,10 @@
                     <p>Gemini helps students create quizzes, summaries, 
                     learning content, and explanations using Google AI.</p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://gemini.google.com" >
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com" >
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='quiz')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -387,9 +441,10 @@
                     <p>Quizlet helps students prepare for exams using flashcards,
                         practice tests, memorization tools, and AI study assistance.</p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://quizlet.com">
+                    <a href="/visit_tool?name=Quizlet&url=https://quizlet.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='exam')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -403,9 +458,10 @@
                     manage exam preparation efficiently.
                     </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.notion.so/product/ai">
+                    <a href="/visit_tool?name=Notion AI&url=https://www.notion.so/product/ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='exam')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -416,9 +472,10 @@
                     summaries, explanations, learning resources, and 
                     question generation.</p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='exam')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -431,9 +488,10 @@
                          assignments, summaries, research, and content generation.
                     </p>
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='exam')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -444,9 +502,10 @@
                     <p>RemNote is a study and revision platform that uses spaced
                     repetition and flashcards for effective exam preparation.</p>
                     <p>Rating : ⭐4.6</p>
-                    <a href="https://www.remnote.com" >
+                    <a href="/visit_tool?name=RemNote&url=https://www.remnote.com" >
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='exam')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -463,9 +522,10 @@
                     assignments and study material
                     easily.</p>
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='notes')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -479,9 +539,10 @@
                     and enhance writing quality using AI
                     </p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://quillbot.com">
+                    <a href="/visit_tool?name=QuillBot&url=https://quillbot.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='notes')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -491,9 +552,10 @@
                     <p>Notion AI helps students organize notes,
                         tasks and study plans efficiently.</p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.notion.so/product/ai">
+                    <a href="/visit_tool?name=Notion AI&url=https://www.notion.so/product/ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='notes')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -506,9 +568,10 @@
                     problem solving and learning concepts.
                     </p>
                     <p>Rating : ⭐4.6</p>
-                    <a href="https://www.deepseek.com">
+                    <a href="/visit_tool?name=Deepseek AI&url=https://www.deepseek.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='notes')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -520,9 +583,10 @@
                     answers and explanations quickly.
                     </p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='notes')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -538,9 +602,10 @@
                     <p>XMind helps students and professionals create mind maps, brainstorm ideas, 
                     organize concepts, and plan projects visually using AI-powered features.</p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://xmind.com">
+                    <a href="/visit_tool?name=XMind&url=https://xmind.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='mind')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -554,9 +619,10 @@
                     and project planning.
                     </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://miro.com">
+                    <a href="/visit_tool?name=Miro&url=https://miro.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='mind')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -567,9 +633,10 @@
                     wireframes, diagrams, and visual brainstorming boards with
                      a simple drag-and-drop interface. </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://whimsical.com" >
+                    <a href="/visit_tool?name=Whimsical&url=https://whimsical.com" >
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='mind')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -583,9 +650,10 @@
                         and AI-powered tools.
                     </p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.canva.com">
+                    <a href="/visit_tool?name=Canva&url=https://www.canva.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='mind')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -598,9 +666,10 @@
                         mind maps and summaries.
                     </p>
                     <p>Rating : ⭐4.6</p>
-                    <a href="https://gitmind.com" >
+                    <a href="/visit_tool?name=Git Mind&url=https://gitmind.com" >
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='mind')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -614,9 +683,10 @@
                     <p>Notion AI helps students create study plans, organize notes, 
                     manage tasks, summarize content, and improve productivity.</p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.notion.so/product/ai">
+                    <a href="/visit_tool?name=Notion AI&url=https://www.notion.so/product/ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='study')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -625,13 +695,14 @@
 
                 <div class="tool-card">
                     <h2>Todolist</h2>
-                    <p>Todoist helps users manage daily tasks, study schedules, 
+                    <p>Todolist helps users manage daily tasks, study schedules, 
                         reminders, and productivity planning efficiently.
                     </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://todoist.com">
+                    <a href="/visit_tool?name=Todolist&url=https://todoist.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='study')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -642,9 +713,10 @@
                         projects, and schedules using boards and task management
                          features.</p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://trello.com">
+                    <a href="/visit_tool?name=Trello&url=https://trello.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='study')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -657,9 +729,10 @@
                      schedules, and learning content using Google AI assistance.
                     </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='study')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -670,9 +743,10 @@
                     <p> Motion is an AI productivity and scheduling tool that
                      automatically manages tasks, calendars, and study planning. </p>
                     <p>Rating : ⭐4.6</p>
-                    <a href="https://www.usemotion.com">
+                    <a href="/visit_tool?name=Motion&url=https://www.usemotion.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='study')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -687,9 +761,10 @@
                     <p>ChatGPT helps students generate reports, summaries, explanations, 
                     research content, and academic writing assistance.</p>
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='report')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -702,9 +777,10 @@
                     summarize information, and generate detailed written content.
                     </p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://claude.ai">
+                    <a href="/visit_tool?name=Claude AI&url=https://claude.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='report')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -714,9 +790,10 @@
                     <p>Grammarly helps improve grammar, spelling, clarity, tone, 
                     and overall writing quality for reports and assignments.</p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.grammarly.com">
+                    <a href="/visit_tool?name=Grammarly&url=https://www.grammarly.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='report')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -729,9 +806,10 @@
                      improve writing, and enhance report quality using AI tools.
                     </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://quillbot.com">
+                    <a href="/visit_tool?name=QuillBot&url=https://quillbot.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='report')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -742,9 +820,10 @@
                     <p>Gemini helps students and professionals generate reports, 
                     summaries, explanations, and structured written content using AI.  </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='report')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -759,9 +838,10 @@
                     <p>ChatGPT helps developers generate code, debug programs,
                     explain concepts, and build projects using AI-powered assistance.</p>
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='code')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -775,9 +855,10 @@
                     development tasks.
                     </p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='code')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -788,9 +869,10 @@
                     generate code, test programs, and collaborate on
                     coding projects directly in the browser.</p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://replit.com">
+                    <a href="/visit_tool?name=Replit AI&url=https://replit.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='code')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -804,9 +886,10 @@
                      debug errors, and improve coding productivity.
                     </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.blackbox.ai">
+                    <a href="/visit_tool?name=Blackbox AI&url=https://www.blackbox.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='code')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -819,9 +902,10 @@
                     and generate detailed coding solutions with 
                     strong reasoning ability.  </p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://claude.ai">
+                    <a href="/visit_tool?name=Claude AI&url=https://claude.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='code')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -837,9 +921,10 @@
                     generate solutions, and understand programming issues 
                     quickly using AI assistance.</p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.blackbox.ai">
+                    <a href="/visit_tool?name=BlackBox AI&url=https://www.blackbox.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='debug')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -853,9 +938,10 @@
                      across different programming languages.
                     </p>
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='debug')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -869,9 +955,10 @@
                     optimize programs, and generate coding solutions using AI support.
                     </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='debug')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -883,9 +970,10 @@
                     developers debug applications, autocomplete code, refactor programs,
                      and improve productivity.  </p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.cursor.com">
+                    <a href="/visit_tool?name=Cursor AI&url=https://www.cursor.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='debug')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -895,13 +983,14 @@
             document.getElementById("heading").innerHTML="Code Explain Tools";
             document.getElementById("tools-container").innerHTML=`
             <div class="tool-card">
-                <h2>ChtGPt</h2>
+                <h2>ChatGPt</h2>
                     <p>ChatGPT helps developers understand code, explain programming concepts,
                     break down complex logic, and learn coding step by step.</p>
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='explain')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -914,9 +1003,10 @@
                     solve programming doubts, and learn software development concepts using AI.
                     </p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='explain')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -927,9 +1017,10 @@
                     explain large programs, understand logic flow, 
                     and generate detailed coding explanations.</p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://claude.ai">
+                    <a href="/visit_tool?name=Claude AI&url=https://claude.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='explain')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -942,9 +1033,10 @@
                     <p>Blackbox AI helps programmers understand code snippets,
                     explain functions, debug programs, and improve coding productivity.  </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.blackbox.ai">
+                    <a href="/visit_tool?name=Blackbox AI&url=https://www.blackbox.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='explain')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -959,9 +1051,10 @@
                     <p>ChatGPT helps students solve DSA problems, explain algorithms,
                     understand data structures, and generate optimized coding solutions.</p>
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='dsa')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -974,9 +1067,10 @@
                     solving coding problems, and providing step-by-step programming guidance.
                     </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='dsa')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -986,9 +1080,10 @@
                     <p>Claude AI helps students understand DSA concepts, 
                     analyze coding problems, and generate clean algorithm explanations.</p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://claude.ai">
+                    <a href="/visit_tool?name=Claude AI&url=https://claude.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='dsa')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1001,9 +1096,10 @@
                     debug DSA programs, and improve coding productivity using AI assistance.
                     </p>
                     <p>Rating : ⭐4.6</p>
-                    <a href="https://www.blackbox.ai">
+                    <a href="/visit_tool?name=Blackbox AI&url=https://www.blackbox.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='dsa')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1020,9 +1116,10 @@
                     <p>ChatGPT helps users write SQL queries, understand database concepts,
                     debug SQL errors, and generate optimized database solutions.</p>
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='sql')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1036,9 +1133,10 @@
                     and assist with database management tasks.
                     </p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='sql')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1048,9 +1146,10 @@
                     <p>SQLAI helps users generate SQL queries automatically 
                     from simple text instructions using artificial intelligence.</p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.sqlai.ai">
+                    <a href="/visit_tool?name=SQL AI&url=https://www.sqlai.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='sql')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1064,9 +1163,10 @@
                     and explain complex database logic.
                     </p>
                     <p>Rating : ⭐4.6</p>
-                    <a href="https://claude.ai">
+                    <a href="/visit_tool?name=Claude AI&url=https://claude.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='sql')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1077,9 +1177,10 @@
                     <p>AI2SQL converts natural language into SQL queries 
                     and helps developers create database queries quickly without manual coding.</p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.ai2sql.io">
+                    <a href="/visit_tool?name=AI2SQL&url=https://www.ai2sql.io">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='sql')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1094,9 +1195,10 @@
                     <p>CodePen is an online coding platform used for building and testing HTML, CSS,
                     and JavaScript projects directly in the browser.</p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://codepen.io">
+                    <a href="/visit_tool?name=CodePen&url=https://codepen.io">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='web')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1109,9 +1211,10 @@
                     build applications, debug programs, and collaborate on coding projects online.
                     </p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://replit.com">
+                    <a href="/visit_tool?name=Replit AI&url=https://replit.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='web')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1121,9 +1224,10 @@
                     <p>ChatGPT helps programmers generate code, debug errors, 
                     explain programming concepts, and assist in software development task</p>
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='web')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1136,9 +1240,10 @@
                     edit, debug, and understand code efficiently.
                     </p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.cursor.com">
+                    <a href="/visit_tool?name=Cursor AI&url=https://www.cursor.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='web')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1149,9 +1254,10 @@
                     <p>Bolt AI helps developers quickly generate full-stack web applications
                     and coding projects using AI-powered development tools.  </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://bolt.new">
+                    <a href="/visit_tool?name=Bolt AI&url=https://bolt.new">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='web')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1165,9 +1271,10 @@
                     <p>ChatGPT helps developers generate code, debug programs, explain concepts,
                     and assist in software and web development.</p>
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='python')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1180,9 +1287,10 @@
                     and improve development productivity using AI.
                     </p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='python')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1192,9 +1300,10 @@
                     <p>Replit AI helps users build applications, generate code, debug projects, 
                     and collaborate on coding directly in the browser.</p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://replit.com">
+                    <a href="/visit_tool?name=Replit AI&url=https://replit.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='python')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1207,9 +1316,10 @@
                     autocomplete code, debug applications, and generate programming solutions.
                     </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.blackbox.ai">
+                    <a href="/visit_tool?name=BlackBox AI&url=https://www.blackbox.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='python')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1227,9 +1337,10 @@
                     solve coding problems, summarize notes, and assist with learning 
                     and productivity tasks.</p>
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cpro')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1243,22 +1354,24 @@
                     and assist with coding and research tasks.
                     </p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://claude.ai">
+                    <a href="/visit_tool?name=Claude AI&url=https://claude.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cpro')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
                 </div>
                 <div class="tool-card">
                 <h2>Gemini</h2>
-                    <p>Gemini is Google’s AI assistant 
+                    <p>Gemini is Google's AI assistant 
                     that helps users with coding, research, summaries, 
                     content generation, and problem-solving tasks.</p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cpro')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1272,9 +1385,10 @@
                     and citations for research and learning.
                     </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.perplexity.ai">
+                    <a href="/visit_tool?name=Perplexity&url=https://www.perplexity.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cpro')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1291,9 +1405,10 @@
                     <p>ChatGPT helps programmers generate code, debug applications,
                     explain concepts, and build software development projects efficiently.</p>
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='java')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1306,9 +1421,10 @@
                     find technical solutions, and get AI-powered answers with sources.
                     </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.perplexity.ai">
+                    <a href="/visit_tool?name=Perplexity&url=https://www.perplexity.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='java')}}"
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1319,9 +1435,10 @@
                     generate programming solutions, debug errors,
                     and explain technical concepts clearly.</p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://claude.ai">
+                    <a href="/visit_tool?name=Claude AI&url=https://claude.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='java')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1335,9 +1452,10 @@
                     in software development tasks.
                     </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='java')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1348,9 +1466,10 @@
                     <p> Replit AI helps users write code, build applications,
                     test programs, and collaborate on coding projects directly in the browser. </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://replit.com">
+                    <a href="/visit_tool?name=Replit AI&url=https://replit.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='java')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1365,9 +1484,10 @@
                     GitHub projects using simple templates and customization tools.</p>
                     
                     <p>Rating : ⭐4.6</p>
-                    <a href="https://readme.so">
+                    <a href="/visit_tool?name=Readme.so&url=https://readme.so">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='git')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1381,9 +1501,10 @@
                     and documentation for software projects.
                     </p>
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='git')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1394,9 +1515,10 @@
                     documentation, comments, 
                     and README content directly inside coding environments.</p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://github.com/features/copilot">
+                    <a href="/visit_tool?name=GitHub Copilot&url=https://github.com/features/copilot">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='git')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1410,9 +1532,10 @@
                     and assist in software development workflows.
                     </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.qodo.ai">
+                    <a href="/visit_tool?name=Codeium&url=https://www.qodo.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='git')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1424,9 +1547,10 @@
                     project explanations, coding documentation, 
                     and technical content using AI assistance.  </p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='git')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1443,9 +1567,10 @@
                 image generation tools.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://leonardo.ai">
+                    <a href="/visit_tool?name=Leonardo AI&url=https://leonardo.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='poster')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1457,9 +1582,10 @@
                 and creative images from text prompts using artificial intelligence.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://openai.com/dall-e">
+                    <a href="/visit_tool?name=DALL.E&url=https://openai.com/dall-e">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='poster')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1471,9 +1597,10 @@
                 cinematic visuals, digital art, and creative design content.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://www.midjourney.com">
+                    <a href="/visit_tool?name=Midjourney&url=https://www.midjourney.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='poster')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1485,9 +1612,10 @@
                 social media graphics, and creative visual content using AI.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://ideogram.ai">
+                    <a href="/visit_tool?name=Ideogram AI&url=https://ideogram.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='poster')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1499,9 +1627,10 @@
                 artwork, illustrations, and high-quality visual designs from text prompts.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://stability.ai">
+                    <a href="/visit_tool?name=Stable Diffusion&url=https://stability.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='poster')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1519,9 +1648,10 @@
                 business cards, and brand identities using artificial intelligence.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://looka.com">
+                    <a href="/visit_tool?name=Looka AI&url=https://looka.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='logo')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1533,9 +1663,10 @@
                 and visual identity content automatically using AI.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.logoai.com">
+                    <a href="/visit_tool?name=Logo AI&url=https://www.logoai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='logo')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1547,29 +1678,14 @@
                 and branding assets for startups, businesses, and personal brands.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://brandmark.io">
+                    <a href="/visit_tool?name=BrandMark AI&url=https://brandmark.io">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='logo')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
-                </div>
-
-                <div class="tool-card">
-                <h2>Designs.ai</h2>
-                <p>Designs.ai is an AI-powered creative platform used for logo design, 
-                video creation, graphic design, and branding content generation.</p>
-                    
-                    <p>Rating : ⭐4.6</p>
-                    <a href="{{url_for('prompts',category='logo')}}">
-                        <button class="tool-btn">Visit tool</button>
-                    </a>
-                    <a href="prompts.html">
-                        <button class="prompt-btn">Get Prompt</button>
-                    </a>
-                </div>
-
-                
+                </div>      
        ` }      
 
         else if(tool == "thumb"){
@@ -1582,9 +1698,10 @@
                  using AI-powered image generation.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://leonardo.ai">
+                    <a href="/visit_tool?name=Leonardo AI&url=https://leonardo.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='thumb')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1596,9 +1713,10 @@
                 posters, and creative images from text prompts using artificial intelligence.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://openai.com/dall-e">
+                    <a href="/visit_tool?name=DALL.E&url=https://openai.com/dall-e">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='thumb')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1610,9 +1728,10 @@
                 artistic visuals, and high-quality digital content.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://www.midjourney.com">
+                    <a href="/visit_tool?name=Midjourney&url=https://www.midjourney.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='thumb')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1624,9 +1743,10 @@
                 typography-based designs, and creative visual content using AI technology.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://ideogram.ai">
+                    <a href="/visit_tool?name=Ideogram AI&url=https://ideogram.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='thumb')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1644,9 +1764,10 @@
                  using AI-powered image generation.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://leonardo.ai">
+                    <a href="/visit_tool?name=Leonardo AI&url=https://leonardo.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='banner')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1659,9 +1780,10 @@
                 and high-quality visual designs.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://www.midjourney.com">
+                    <a href="/visit_tool?name=Midjourney&url=https://www.midjourney.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='banner')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1674,9 +1796,10 @@
                  from text prompts using artificial intelligence.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://openai.com/dall-e">
+                    <a href="/visit_tool?name=DALL.E&url=https://openai.com/dall-e">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='banner')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1688,9 +1811,10 @@
                 social media visuals, and creative AI-generated images easily.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://ideogram.ai">
+                    <a href="/visit_tool?name=Ideogram AI&url=https://ideogram.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='banner')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1707,9 +1831,10 @@
                 diagrams, and presentation-style graphics quickly using AI.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.napkin.ai">
+                    <a href="/visit_tool?name=Napkin AI&url=https://www.napkin.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='banner')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1721,9 +1846,10 @@
                  documents, and visual storytelling content using AI-powered designs.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://gamma.app">
+                    <a href="/visit_tool?name=Gamma AI&url=https://gamma.app">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='banner')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1736,9 +1862,10 @@
                 smart AI-based formatting and layouts.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.beautiful.ai">
+                    <a href="/visit_tool?name=Beautiful AI&url=https://www.beautiful.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='banner')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1758,24 +1885,26 @@
                     and auto-posting features for social media management</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.predis.ai">
+                    <a href="/visit_tool?name=Predis AI&url=https://www.predis.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='social')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
                 </div>
 
                 <div class="tool-card">
-                <h2>Abode Firefly</h2>
+                <h2>Adobe Firefly</h2>
                 <p>Adobe Firefly helps users generate social media posts, 
                 creative graphics, images, and AI-powered visual content 
                 for digital platforms.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://firefly.adobe.com">
+                    <a href="/visit_tool?name=Adobe Firefly&url=https://firefly.adobe.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='social')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1787,9 +1916,10 @@
                  digital artwork, banners, thumbnails, and creative visual designs using AI.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://leonardo.ai">
+                    <a href="/visit_tool?name=Leonardo AI&url=https://leonardo.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='social')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1801,9 +1931,10 @@
                 posters, illustrations, and creative images from text prompts.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://openai.com/dall-e">
+                    <a href="/visit_tool?name=Dall.E&url=https://openai.com/dall-e">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='social')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1820,9 +1951,10 @@
                     and visual storytelling slides using AI-powered layouts.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://gamma.app">
+                    <a href="/visit_tool?name=Gamma AI&url=https://gamma.app">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='present')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1834,9 +1966,10 @@
                     smart templates, layouts, and modern visual designs.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.beautiful.ai">
+                    <a href="/visit_tool?name=Beautiful AI&url=https://www.beautiful.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='present')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1849,9 +1982,10 @@
                     automatically and helps users create PPTs quickly.</p>
                     
                     <p>Rating : ⭐4.6</p>
-                    <a href="https://www.slidesai.io">
+                    <a href="/visit_tool?name=Slides AI&url=https://www.slidesai.io">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='present')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1868,9 +2002,10 @@
                      and app designs automatically using AI-powered design generation.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://uizard.io">
+                    <a href="/visit_tool?name=Uizard AI&url=https://uizard.io">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='ui/ux')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1882,9 +2017,10 @@
                 and Figma-ready interfaces from simple text prompts using artificial intelligence.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.usegalileo.ai">
+                    <a href="/visit_tool?name=Galileo AI&url=https://www.usegalileo.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='ui/ux')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1896,9 +2032,10 @@
                 and collaborative interface designs quickly using AI-powered design tools.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.visily.ai">
+                    <a href="/visit_tool?name=Visily AI&url=https://www.visily.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='ui/ux')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1910,9 +2047,10 @@
                     automate design tasks, and improve UI/UX workflows using AI features inside Figma</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.figma.com/ai">
+                    <a href="/visit_tool?name=Figma AI&url=https://www.figma.com/ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='ui/ux')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1929,9 +2067,10 @@
                     and creative visual content from text prompts.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://openai.com/dall-e">
+                    <a href="/visit_tool?name=DALL.E&url=https://openai.com/dall-e">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='image')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1944,9 +2083,10 @@
                 and realistic visual designs.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://www.midjourney.com">
+                    <a href="/visit_tool?name=Midjourney&url=https://www.midjourney.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='image')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1958,9 +2098,10 @@
                 thumbnails, and professional digital designs with advanced image generation tools.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://leonardo.ai">
+                    <a href="/visit_tool?name=Leonardo AI&url=https://leonardo.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='image')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1972,9 +2113,10 @@
                     banners, and creative visual content easily.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://ideogram.ai">
+                    <a href="/visit_tool?name=Ideogram AI&url=https://ideogram.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='image')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -1986,9 +2128,10 @@
                     illustrations, posters, and realistic images from text prompts.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://stability.ai">
+                    <a href="/visit_tool?name=Stable diffusion&url=https://stability.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='image')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2006,9 +2149,10 @@
                 and cover letters using AI-powered templates and resume writing assistance.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.kickresume.com">
+                    <a href="/visit_tool?name=Kickresume&url=https://www.kickresume.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='resume')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2021,9 +2165,10 @@
                 and improve interview chances using artificial intelligence.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.rezi.ai">
+                    <a href="/visit_tool?name=Rezi AI&url=https://www.rezi.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='resume')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2036,9 +2181,10 @@
                     and customizable professional templates</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://enhancv.com">
+                    <a href="/visit_tool?name=Enhancv&url=https://enhancv.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='resume')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2051,9 +2197,10 @@
                 and improve resume content using AI tools.</p>
                     
                     <p>Rating : ⭐4.6</p>
-                    <a href="https://www.tealhq.com">
+                    <a href="/visit_tool?name=Teal AI&url=https://www.tealhq.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='resume')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2064,14 +2211,15 @@
             document.getElementById("heading").innerHTML="Resume Builder tools ";
             document.getElementById("tools-container").innerHTML=`
             <div class="tool-card">
-                <h2>rezi AI</h2>
+                <h2>Rezi AI</h2>
                 <p>Rezi AI helps users create ATS-friendly resumes, optimize keywords,
                      and improve resume quality using AI assistance.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.rezi.ai">
+                    <a href="/visit_tool?name=Rezi AI&url=https://www.rezi.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cresume')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2083,9 +2231,10 @@
                 cover letters, and personal websites using AI-powered templates.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.kickresume.com">
+                    <a href="/visit_tool?name=Kickresume&url=https://www.kickresume.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cresume')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2097,9 +2246,10 @@
                     track job applications, and optimize resumes for ATS systems.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.tealhq.com">
+                    <a href="/visit_tool?name=Teal AI&url=https://www.tealhq.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cresume')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2111,9 +2261,10 @@
                  customizable templates, and ATS optimization features.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://enhancv.com">
+                    <a href="/visit_tool?name=Enhancv&url=https://enhancv.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cresume')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2125,9 +2276,10 @@
                 cover letters quickly using professional templates and AI writing assistance.</p>
                     
                     <p>Rating : ⭐4.6</p>
-                    <a href="https://resume.io">
+                    <a href="/visit_tool?name=Resume.io&url=https://resume.io">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cresume')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2143,9 +2295,10 @@
                  AI-powered writing assistance and templates.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.kickresume.com">
+                    <a href="/visit_tool?name=Kickresume&url=https://www.kickresume.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cover')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2157,9 +2310,10 @@
                     ATS-friendly cover letters tailored to job roles and descriptions.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.rezi.ai">
+                    <a href="/visit_tool?name=Rezi AI&url=https://www.rezi.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cover')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2171,9 +2325,10 @@
                 and improve job application quality using AI tools.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.tealhq.com">
+                    <a href="/visit_tool?name=Teal AI&url=https://www.tealhq.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cover')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2183,11 +2338,11 @@
                 <h2>ChatGPT</h2>
                 <p>ChatGPT helps users generate cover letters, 
                     job application content, and professional writing assistance.</p>
-                    
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cover')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2197,12 +2352,12 @@
                 <div class="tool-card">
                 <h2>Gemini</h2>
                 <p>Gemini helps users create cover letters, professional content, 
-                    and job-related writing using Google AI.</p>
-                    
+                    and job-related writing using Google AI.</p> 
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cover')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2217,9 +2372,10 @@
                     AI feedback, and interview coaching tools.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.finalroundai.com">
+                    <a href="/visit_tool?name=FinalRound AI&url=https://www.finalroundai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='interview')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2231,9 +2387,10 @@
                     and improve communication skills using AI feedback.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://grow.google/certificates/interview-warmup">
+                    <a href="/visit_tool?name=Interview Warmup&url=https://grow.google/certificates/interview-warmup">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='interview')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2245,9 +2402,10 @@
                     mock interview sessions and AI-assisted preparation.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.pramp.com">
+                    <a href="/visit_tool?name=Pramp AI&url=https://www.pramp.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='interview')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2259,9 +2417,10 @@
                      technical explanations, and mock interview practice.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='interview')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2273,9 +2432,10 @@
                 AI-generated questions, answers, and communication guidance.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='interview')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2291,9 +2451,10 @@
                     receive AI-based interview feedback.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.finalroundai.com">
+                    <a href="/visit_tool?name=FinalRound AI&url=https://www.finalroundai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='hr')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2305,9 +2466,10 @@
                     interview questions and improve speaking confidence.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://grow.google/certificates/interview-warmup">
+                    <a href="/visit_tool?name=Interview Warmup&url=https://grow.google/certificates/interview-warmup">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='hr')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2319,9 +2481,10 @@
                     and behavioral interview responses.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='hr')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2333,9 +2496,10 @@
                     and improve professional communication skills.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://claude.ai">
+                    <a href="/visit_tool?name=Claude AI&url=https://claude.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='hr')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2348,9 +2512,10 @@
                     and generate professional answers using AI assistance.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='hr')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2366,9 +2531,10 @@
                     anonymous mock interviews and coding practice.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://interviewing.io">
+                    <a href="/visit_tool?name=Interviewing.io&url=https://interviewing.io">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='tech')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2380,9 +2546,10 @@
                     and technical communication through mock interviews.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.pramp.com">
+                    <a href="/visit_tool?name=Pramp AI&url=https://www.pramp.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='tech')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2394,9 +2561,10 @@
                     coding interview preparation, and technical interview feedback.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.finalroundai.com">
+                    <a href="/visit_tool?name=FinalRound AI&url=https://www.finalroundai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='tech')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2408,9 +2576,10 @@
                     and prepare for technical interviews.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='tech')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2423,9 +2592,10 @@
                     and software development topics.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='tech')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2441,9 +2611,10 @@
                     and personal branding content using AI.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://taplio.com">
+                    <a href="/visit_tool?name=Taplio AI&url=https://taplio.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='linkedin')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2455,9 +2626,10 @@
                     and professional writing using AI tools.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.copy.ai">
+                    <a href="/visit_tool?name=Copy.AI&url=https://www.copy.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='linkedin')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2469,9 +2641,10 @@
                      and branding content using AI assistance.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.jasper.ai">
+                    <a href="/visit_tool?name=Jasper AI&url=https://www.jasper.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='linkedin')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2483,9 +2656,10 @@
                     and professional branding content.</p>
                     
                     <p>Rating : ⭐4.</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='linkedin')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2497,9 +2671,10 @@
                     and career-related content using AI.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='linkedin')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2515,9 +2690,10 @@
                     and modern UI designs using AI-powered website generation.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.framer.com/ai">
+                    <a href="/visit_tool?name=Framer AI&url=https://www.framer.com/ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='portfolio')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2529,23 +2705,25 @@
                     and business pages automatically using artificial intelligence.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://durable.co">
+                    <a href="/visit_tool?name=Durable AI&url=https://durable.co">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='portfolio')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
                 </div>
 
                 <div class="tool-card">
-                <h2>Loweb AI</h2>
+                <h2>Lovable AI</h2>
                 <p>Lovable AI helps developers and creators generate 
                     full-stack web applications and portfolio website ideas using AI.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://lovable.dev">
+                    <a href="/visit_tool?name=Lovable AI&url=https://lovable.dev">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='portfolio')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2557,9 +2735,10 @@
                     and app UI/UX layouts using AI design generation.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://uizard.io">
+                    <a href="/visit_tool?name=Uizard AI&url=https://uizard.io">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='portfolio')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2572,9 +2751,10 @@
                     and portfolio layouts from simple text prompts.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.usegalileo.ai">
+                    <a href="/visit_tool?name=Galileo AI&url=https://www.usegalileo.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='portfolio')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2590,9 +2770,10 @@
                      and career planning using AI-powered tools.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.tealhq.com">
+                    <a href="/visit_tool?name=Teal AI&url=https://www.tealhq.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cintern')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2604,9 +2785,10 @@
                     and improve job readiness with AI coaching.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.finalroundai.com">
+                    <a href="/visit_tool?name=FinalRound AI&url=https://www.finalroundai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cintern')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2618,9 +2800,10 @@
                     resume preparation, interview practice, and career advice.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cintern')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2633,9 +2816,10 @@
                      and improve professional skills using AI assistance.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cintern')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2647,9 +2831,10 @@
                     and professional communication support.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://claude.ai">
+                    <a href="/visit_tool?name=Claude AI&url=https://claude.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cintern')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2665,9 +2850,10 @@
                     and academic writing using AI-powered content generation.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.jasper.ai">
+                    <a href="/visit_tool?name=Jasper aI&url=https://www.jasper.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='sop')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2679,9 +2865,10 @@
                     and professional writing content quickly using AI assistance.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.copy.ai">
+                    <a href="/visit_tool?name=Copy.ai &url=https://www.copy.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='sop')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2693,9 +2880,10 @@
                     university applications, career statements, and formal documents effectively.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='sop')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2708,9 +2896,10 @@
                     and professional writing using AI-powered assistance.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='sop')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2723,9 +2912,10 @@
                     </p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://claude.ai">
+                    <a href="/visit_tool?name=Claude AI&url=https://claude.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='sop')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2741,9 +2931,10 @@
                     and business communication automatically using AI.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.flowrite.com">
+                    <a href="/visit_tool?name=Flowrite AI&url=https://www.flowrite.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cemail')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2755,9 +2946,10 @@
                     with AI-powered autocomplete and writing assistance.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.compose.ai">
+                    <a href="/visit_tool?name=Compose AI&url=https://www.compose.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cemail')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2769,9 +2961,10 @@
                     and business messages efficiently.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cemail')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2784,9 +2977,10 @@
                     and workplace writing using Google AI.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cemail')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2798,9 +2992,10 @@
                     and formal writing with detailed AI assistance.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://claude.ai">
+                    <a href="/visit_tool?name=Claude AI&url=https://claude.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='cemail')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2816,9 +3011,10 @@
                     and professional written content using AI assistance</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='word')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2830,9 +3026,10 @@
                     and professional written content using AI assistance</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='word')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2844,9 +3041,10 @@
                     and professional writing with AI-powered assistance.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://claude.ai">
+                    <a href="/visit_tool?name=Claude AI&url=https://claude.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='word')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2859,9 +3057,10 @@
                     and organized workspace content using AI tools.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.notion.so/product/ai">
+                    <a href="/visit_tool?name=Notion AI&url=https://www.notion.so/product/ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='word')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2870,12 +3069,13 @@
                 <div class="tool-card">
                 <h2>Microsoft Copilot</h2>
                 <p>Microsoft Copilot helps users generate Word documents, reports,
-                \and professional content inside Microsoft Office tools.</p>
+                and professional content inside Microsoft Office tools.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://copilot.microsoft.com">
+                    <a href="/visit_tool?name=Microsoft Copilot&url=https://copilot.microsoft.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='word')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2891,9 +3091,10 @@
                      explanations, and answers from documents.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.chatpdf.com">
+                    <a href="/visit_tool?name=ChatPDF&url=https://www.chatpdf.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='pdf')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2905,9 +3106,10 @@
                     and documents quickly using AI-powered analysis.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.humata.ai">
+                    <a href="/visit_tool?name=Humata AI&url=https://www.humata.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='pdf')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2919,9 +3121,10 @@
                 and interact with PDF documents using artificial intelligence.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://updf.com/ai">
+                    <a href="/visit_tool?name=UPDF AI&url=https://updf.com/ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='pdf')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2934,9 +3137,10 @@
                     and generate document insights.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='pdf')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2948,9 +3152,10 @@
                     and research content using AI assistance.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='pdf')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2966,9 +3171,10 @@
                     and analyze data using AI tools.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://ajelix.com">
+                    <a href="/visit_tool?name=Ajelix AI&url=https://ajelix.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='excel')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2980,9 +3186,10 @@
                     and spreadsheet automation using AI.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://formulabot.com">
+                    <a href="/visit_tool?name=Formula Bot&url=https://formulabot.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='excel')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -2994,9 +3201,10 @@
                     generate formulas, and automate spreadsheet tasks.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://copilot.microsoft.com">
+                    <a href="/visit_tool?name=Microsoft Copilot&url=https://copilot.microsoft.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='excel')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3009,9 +3217,10 @@
                     generate formulas, and explain spreadsheet concepts.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='excel')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3022,9 +3231,10 @@
                 <p>Gemini helps users create formulas, analyze spreadsheets, 
                     and automate Excel-related tasks using AI.</p>
                     <p>Rating : ⭐4.8</p>
-                    <a href=>
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='excel')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3039,9 +3249,10 @@
                 <p>Formula Bot helps users generate spreadsheet formulas, automate calculations, 
                     and simplify Excel tasks using AI.</p> 
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://formulabot.com">
+                    <a href="/visit_tool?name=FormulaBot&url=https://formulabot.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='spread')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3052,9 +3263,10 @@
                 <p>Ajelix AI helps users generate formulas, analyze spreadsheet data, 
                     and automate reporting tasks.</p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://ajelix.com">
+                    <a href="/visit_tool?name=Ajelix AI&url=https://ajelix.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='spread')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3065,9 +3277,10 @@
                 <p>SheetAI helps users use AI directly inside spreadsheets
                      for generating formulas and automating sheet operations.</p>
                     <p>Rating : ⭐4.6</p>
-                    <a href="https://www.sheetai.app">
+                    <a href="/visit_tool?name=Sheet AI&url=https://www.sheetai.app">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='spread')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3079,9 +3292,10 @@
                 <p>ChatGPT helps users understand spreadsheet formulas, 
                     fix errors, and automate calculations.</p>
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='spread')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3092,9 +3306,10 @@
                 <p>Gemini helps users generate spreadsheet formulas 
                     and solve Excel-related problems using AI.</p>  
                     <p>Rating : ⭐4.8</p>
-                    <a href="{{url_for('prompts',category='spread')}}">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="prompts.html">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3105,14 +3320,15 @@
             document.getElementById("heading").innerHTML="Document Formatting Tools ";
             document.getElementById("tools-container").innerHTML=`
             <div class="tool-card">
-                <h2>notion AI</h2>
+                <h2>Notion AI</h2>
                 <p>Notion AI helps users organize and format documents, notes, 
                     and workspace content efficiently.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.notion.so/product/ai">
+                    <a href="/visit_tool?name=Notion AI&url=https://www.notion.so/product/ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='doc')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3124,9 +3340,10 @@
                     and Office files using AI assistance.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://copilot.microsoft.com">
+                    <a href="/visit_tool?name=Microsoft Copilot&url=https://copilot.microsoft.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='doc')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3138,9 +3355,10 @@
                     and professional writing quality.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.grammarly.com">
+                    <a href="/visit_tool?name=Grammarly&url=https://www.grammarly.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='doc')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3153,9 +3371,10 @@
                     and professional content effectively.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='doc')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3167,9 +3386,10 @@
                     generate professional written content.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='doc')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3184,9 +3404,10 @@
                     <p>Acrobat AI Assistant helps users convert, summarize, edit, 
                         and manage PDF documents using AI tools.</p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.adobe.com/acrobat/ai-assistant.html">
+                    <a href="/visit_tool?name=Acrobat AI Assistant&url=https://www.adobe.com/acrobat/ai-assistant.html">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='pdfconvert')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3197,9 +3418,10 @@
                 <p>UPDF AI helps users convert, summarize, and interact
                      with PDF files using artificial intelligence.</p>
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://updf.com/ai">
+                    <a href="/visit_tool?name=UPDF AI&url=https://updf.com/ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='pdfconvert')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3211,9 +3433,10 @@
                     and manage PDF files easily online.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://smallpdf.com">
+                    <a href="/visit_tool?name=SmallPDF AI&url=https://smallpdf.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='pdfconvert')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3226,9 +3449,10 @@
                     and edit PDF documents quickly.</p>
                     
                     <p>Rating : ⭐4.6</p>
-                    <a href="https://www.ilovepdf.com">
+                    <a href="/visit_tool?name=iLOVE PDF AI&url=https://www.ilovepdf.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='pdfconvert')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3240,9 +3464,10 @@
                     and manage PDF documents using AI-powered tools.</p>
                     
                     <p>Rating : ⭐4.6</p>
-                    <a href="https://www.pdfgear.com">
+                    <a href="/visit_tool?name=PDF gear AI&url=https://www.pdfgear.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='pdfconvert')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3257,9 +3482,10 @@
                 <p>Grammarly AI helps users improve report grammar, clarity, formatting, 
                     and professional writing quality.</p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.grammarly.com">
+                    <a href="/visit_tool?name=Grammarly&url=https://www.grammarly.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='reportformat')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3270,9 +3496,10 @@
                 <p>Notion AI helps users organize and structure reports, notes, 
                     and documents efficiently.</p>        
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://www.notion.so/product/ai">
+                    <a href="/visit_tool?name=Notion AI&url=https://www.notion.so/product/ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='reportformat')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3284,9 +3511,10 @@
                     and professional documents.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='reportformat')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3299,9 +3527,10 @@
                     and writing assistance.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='reportformat')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3313,9 +3542,10 @@
                     professional documents with AI support.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://claude.ai">
+                    <a href="/visit_tool?name=Claude AI&url=https://claude.ai">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='reportformat')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3331,9 +3561,10 @@
                     using AI translation technology.</p>
                     
                     <p>Rating : ⭐4.9</p>
-                    <a href="https://www.deepl.com">
+                    <a href="/visit_tool?name=DeepL&url=https://www.deepl.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='doctrans')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3345,9 +3576,10 @@
                     and websites into different languages instantly.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://translate.google.com">
+                    <a href="/visit_tool?name=Google Translate AI&url=https://translate.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='doctrans')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3359,9 +3591,10 @@
                     and text using AI-powered translation tools.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://translator.microsoft.com">
+                    <a href="/visit_tool?name=Microsoft Translator AI&url=https://translator.microsoft.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='doctrans')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3374,9 +3607,10 @@
                      across multiple languages.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://chat.openai.com">
+                    <a href="/visit_tool?name=ChatGPT&url=https://chat.openai.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='doctrans')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3387,9 +3621,10 @@
                 <p>Gemini helps users translate and understand multilingual 
                     content using AI assistance.</p>
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://gemini.google.com">
+                    <a href="/visit_tool?name=Gemini&url=https://gemini.google.com">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='doctrans')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3405,9 +3640,10 @@
                     and scanned documents using AI OCR technology.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://nanonets.com/ocr">
+                    <a href="/visit_tool?name=Nanonets OCR&url=https://nanonets.com/ocr">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='ocr')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3419,9 +3655,10 @@
                     editable text from documents and images.</p>
                     
                     <p>Rating : ⭐4.8</p>
-                    <a href="https://www.adobe.com/acrobat">
+                    <a href="/visit_tool?name=Acrobat OCR AI&url=https://www.adobe.com/acrobat">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='ocr')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3433,9 +3670,10 @@
                     and identify objects using AI vision technology.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://lens.google">
+                    <a href="/visit_tool?name=Google Lens&url=https://lens.google">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='ocr')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3448,9 +3686,10 @@
                     into editable text using OCR technology.</p>
                     
                     <p>Rating : ⭐4.6</p>
-                    <a href="https://ocr.space">
+                    <a href="/visit_tool?name=OCR space&url=https://ocr.space">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='ocr')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3462,9 +3701,10 @@
                     using AI-powered computer vision services.</p>
                     
                     <p>Rating : ⭐4.7</p>
-                    <a href="https://azure.microsoft.com/en-us/products/ai-services/ai-vision">
+                    <a href="/visit_tool?name=Microsoft OCR AI&url=https://azure.microsoft.com/en-us/products/ai-services/ai-vision">
                         <button class="tool-btn">Visit tool</button>
                     </a>
+                    <span class="heart-btn" onclick="toggleHeart(this)">♡</span>
                     <a href="{{url_for('prompts',category='ocr')}}">
                         <button class="prompt-btn">Get Prompt</button>
                     </a>
@@ -3472,7 +3712,25 @@
 
             `}
           
-    </script>    
+    </script>   
+<script>
+window.onload = function(){
+    let cards = document.querySelectorAll(".tool-card");
+    cards.forEach(card => {
+        let name = card.querySelector("h2").innerText.trim();
+        let heart =card.querySelector(".heart-btn");
+        if(heart && userFavourites.includes(name)){
+            heart.innerHTML = "❤️";
+        }else{
+            heart.innerHTML="♡";
+        }
+
+    });
+
+};
+
+</script>
+   
     </div>
 </body>
 </html>

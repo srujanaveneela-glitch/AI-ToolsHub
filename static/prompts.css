@@ -94,6 +94,18 @@ hr{
     transform: scale(1.05);
     box-shadow: 0 0 15px #00e5ff;
 }
+.heart-btn{
+    font-size:40px;
+    cursor:pointer;
+    margin-left:15px;
+    vertical-align:middle ;
+    user-select: none;
+    transition: 0.3s;
+    color:#555;
+}
+.heart-btn:hover{
+    transform:scale(1.15);
+}
 @media(max-width:768px){
     #prompt-container{
         grid-template-columns: 1fr;
@@ -104,5 +116,9 @@ hr{
     }
     .input-box input{
         width: 90%;
+    }
+    .heart-btn{
+        font-size:35px;
+        margin-left:10px;
     }
 }

@@ -12,19 +12,34 @@
 <body>
 
     <nav class="navbar">
-        <div class="logo">AI Tools Hub</div>
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-        <ul class="nav-links" id="nav-links">
-            <li><a href="{{ url_for('home') }}">Home</a></li>
-            <li><a href="{{ url_for('study')}}">Study</a></li>
-            <li><a href="{{ url_for('coding')}}">Coding</a></li>
-            <li><a href="{{ url_for('design')}}">Design</a></li>
-            <li><a href="{{ url_for('career')}}">Career</a></li>
-            <li><a href="{{ url_for('document')}}">Document</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="{{url_for('logout')}}" onclick="return confirmLogout()" class="logout-btn">Logout</a></li>
-        </ul>
+        <div class="logo">AI Tools Hub</div>
+        <a href="#about" class="about-link">About</a>
     </nav>
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+    <div class="sidebar" id="sidebar">
+    <div class="profile-section">
+        <div class="profile-avatar">
+            👤
+        </div>
+        <h3>{{ session['username'] }}</h3>
+        <p>{{ session['email'] }}</p>
+    </div>
+    <a href="{{ url_for('home') }}">🏠 Home</a>
+    <a href="{{ url_for('myfavourites') }}"> ❤️ Favorites</a>
+    <a href="{{ url_for('recent_tools') }}">  🕒 Recently Used</a>
+    <button class="category-btn" onclick="toggleCategories()">📂 Categories ▼</button>
+    <div class="categories"
+         id="categories">
+        <a href="{{ url_for('study') }}"> 📘 Study </a>
+        <a href="{{ url_for('coding') }}">💻 Coding</a>
+        <a href="{{ url_for('design') }}">🎨 Design</a>
+        <a href="{{ url_for('career') }}">💼 Career</a>
+        <a href="{{ url_for('document') }}">📄 Document</a>
+    </div>
+    <a href="{{url_for('logout')}}" onclick="return confirmLogout()">🚪 Logout</a>
+   </div>
+   <div class="main-content">
     <div class="breadcrumb">
         <a href="{{url_for('home')}}">Home</a>>
         <span>Dashboard</span>
@@ -83,13 +98,20 @@
         <p>@ 2026 AI Tools Hub |Developed for students to find best AI Tools</p>
 
     </footer>
+    </div>
     <script>
         function toggleMenu(){
-            document.getElementById("nav-links").classList.toggle("active");
+            document.getElementById("sidebar").classList.toggle("active");
+            document.getElementById("overlay").classList.toggle("active");
         }
         function confirmLogout(){
             return confirm("Are you sure you want to logout?")
         }
+        function toggleCategories(){
+           document.getElementById("categories").classList.toggle("show");
+        }
+        
+
     </script>
  
     </body>
